@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Map Jawa Timur</title>
+
+<style>
+    svg path {
+        fill: #d5d5d5;
+        stroke: #333;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+
+    svg path:hover {
+        fill: orange;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>Peta Jawa Timur</h2>
+
+<!-- tempat peta akan dimasukkan -->
+<div id="map-container"></div>
+
+<script>
+    // load map.html, ambil SVG-nya, lalu tempel langsung ke halaman
+    fetch("map.html")
+        .then(res => res.text())
+        .then(svg => {
+            document.getElementById("map-container").innerHTML = svg;
+        });
+
+    const tooltip = document.getElementById("tooltip");
+    const paths = document.querySelectorAll("path");
+
+    paths.forEach(path => {
+        const name = path.getAttribute("data-name") || path.getAttribute("title");
+        if (!name) return;
+
+        path.addEventListener("mousemove", (e) => {
+            tooltip.textContent = name;
+            tooltip.style.opacity = "1";
+            tooltip.style.left = (e.pageX + 10) + "px";
+            tooltip.style.top = (e.pageY - 5) + "px";
+        });
+
+        path.addEventListener("mouseleave", () => {
+            tooltip.style.opacity = "0";
+        });
+    });
+</script>
+
+</body>
+</html>
