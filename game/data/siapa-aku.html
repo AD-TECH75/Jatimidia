@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Siapa Aku?</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="headerfooter.css">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    background: #f5f6fa;
+    padding: 30px;
+    color: #2c3e50;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+
+  .clue-box {
+    background: #ecf0f1;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: .2s;
+    outline: none;
+  }
+
+  input:focus {
+    border-color: #3498db;
+  }
+
+  button {
+    margin: 8px;
+    padding: 12px 20px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: .2s;
+  }
+
+  button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+  }
+
+  .streak {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .message {
+    margin-top: 15px;
+    color: #8e44ad;
+    min-height: 30px;
+    font-weight: 600;
+  }
+</style>
+</head>
+
+<body>
+      <header class="header">
+      <div class="header-left">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg"
+          alt="Logo Jawa Timur"
+          class="logo"
+        />
+
+        <h1 class="region-title">jawa timur</h1>
+      </div>
+
+      <div class="header-right">
+        <a href="#" class="nav-link">beranda</a>
+
+        <a href="#about" class="nav-link">About</a>
+
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </header>
+    <main>
+<div class="container">
+  <h1>Game Siapa Aku?</h1>
+
+  <div id="clueList"></div>
+
+  <input type="text" id="answer" placeholder="Siapa aku?" autocomplete="off">
+
+  <div>
+    <button onclick="checkAnswer()">Kirim Jawaban</button>
+    <button onclick="resetGame()">Reset</button>
+  </div>
+
+  <div class="streak">Winstreak: <span id="streakNum">0</span></div>
+
+  <div class="message" id="messageBox"></div>
+</div>
+</main>
+<footer>
+
+</footer>
+
+<script>
+  const data = [
+    {
+      answer: "surabaya",
+      clues: [
+        "Aku adalah ibu kota Jawa Timur.",
+        "Aku punya Jembatan Suramadu.",
+        "Aku dijuluki Kota Pahlawan."
+      ]
+    },
+    {
+      answer: "malang",
+      clues: [
+        "Udara kotaku sejuk.",
+        "Aku dikenal dengan apel.",
+        "Kota wisataku bernama Batu."
+      ]
+    },
+    {
+      answer: "banyuwangi",
+      clues: [
+        "Aku berada di ujung timur Jawa.",
+        "Aku punya Kawah Ijen.",
+        "Aku punya budaya Gandrung."
+      ]
+    },
+    {
+      answer: "jember",
+      clues: [
+        "Aku terkenal dengan festival karnaval raksasa.",
+        "Aku punya tembakau berkualitas.",
+        "Namaku sering muncul saat 'JFC'."
+      ]
+    },
+    {
+      answer: "probolinggo",
+      clues: [
+        "Aku dekat Gunung Bromo.",
+        "Aku punya mangga manis.",
+        "Aku kota pesisir."
+      ]
+    },
+    {
+      answer: "kediri",
+      clues: [
+        "Aku punya Gunung Kelud.",
+        "Aku dikenal sebagai kota tahu.",
+        "Aku rumah perusahaan rokok besar."
+      ]
+    },
+    {
+      answer: "ponorogo",
+      clues: [
+        "Aku kota budaya.",
+        "Aku memiliki tarian Reog.",
+        "Aku dekat Madiun."
+      ]
+    },
+    {
+      answer: "gresik",
+      clues: [
+        "Aku kota industri.",
+        "Aku punya banyak pabrik semen.",
+        "Aku dijuluki kota santri."
+      ]
+    },
+    {
+      answer: "lamongan",
+      clues: [
+        "Aku terkenal dengan soto khasku.",
+        "Aku punya klub bola berwarna biru.",
+        "Aku dekat Tuban dan Gresik."
+      ]
+    },
+    {
+      answer: "sidoarjo",
+      clues: [
+        "Aku dekat Surabaya.",
+        "Aku terkenal dengan bandeng & udang.",
+        "Aku pernah mengalami semburan lumpur besar."
+      ]
+    },
+    {
+      answer: "blitar",
+      clues: [
+        "Aku kota kecil yang tenang.",
+        "Aku tempat makam Bung Karno.",
+        "Aku dekat dengan Tulungagung."
+      ]
+    },
+    {
+      answer: "madiun",
+      clues: [
+        "Aku terkenal dengan pecel.",
+        "Aku disebut kota gadis.",
+        "Aku pusat perkeretaapian."
+      ]
+    },
+    {
+      answer: "mojokerto",
+      clues: [
+        "Aku dekat Surabaya.",
+        "Aku bagian dari kawasan Majapahit.",
+        "Aku penuh situs sejarah."
+      ]
+    },
+    {
+      answer: "lumajang",
+      clues: [
+        "Aku dekat Gunung Semeru.",
+        "Aku punya Ranu Kumbolo.",
+        "Aku ada di selatan Jawa Timur."
+      ]
+    },
+    {
+      answer: "situbondo",
+      clues: [
+        "Aku berada di jalur pantura timur.",
+        "Aku dekat Taman Baluran.",
+        "Udaraku panas."
+      ]
+    },
+    {
+      answer: "trenggalek",
+      clues: [
+        "Aku kota kecil di selatan.",
+        "Aku dekat Pacitan dan Tulungagung.",
+        "Aku punya pantai indah."
+      ]
+    },
+    {
+      answer: "pacitan",
+      clues: [
+        "Aku memiliki presiden ke-6 lahir di sini.",
+        "Aku terkenal dengan pantai.",
+        "Aku kota gua."
+      ]
+    },
+    {
+      answer: "sumenep",
+      clues: [
+        "Aku berada di Pulau Madura.",
+        "Aku punya keraton.",
+        "Aku punya banyak kerajaan kecil dulu."
+      ]
+    },
+    {
+      answer: "pamekasan",
+      clues: [
+        "Aku di Madura.",
+        "Aku penghasil garam.",
+        "Aku punya karapan sapi."
+      ]
+    },
+    {
+      answer: "bojonegoro",
+      clues: [
+        "Aku terkenal dengan minyak.",
+        "Aku punya hutan jati besar.",
+        "Aku dekat Bengawan Solo."
+      ]
+    }
+  ];
+
+  let index = 0;
+  let streak = 0;
+
+  function loadQuestion() {
+    index = Math.floor(Math.random() * data.length);
+    const clues = data[index].clues;
+
+    const clueBox = document.getElementById("clueList");
+    clueBox.innerHTML = "";
+
+    clues.forEach((c, i) => {
+      clueBox.innerHTML += `<div class="clue-box"><b>Clue ${i+1}:</b> ${c}</div>`;
+    });
+
+    document.getElementById("answer").value = "";
+  }
+
+  function streakMessage() {
+    if (streak >= 10) return "🔥 Kamu jenius! Tidak terbendung!";
+    if (streak >= 7) return "⚡ Luar biasa! Kamu ahli tebak daerah!";
+    if (streak >= 5) return "🔥 Mantap! Kamu mulai sangat kuat!";
+    if (streak >= 3) return "✨ Kamu mulai memanas!";
+    return "Ayo lanjut!";
+  }
+
+  function checkAnswer() {
+    const user = document.getElementById("answer").value.trim().toLowerCase();
+    const correct = data[index].answer.toLowerCase();
+
+    if (user === correct) {
+      streak++;
+      document.getElementById("streakNum").innerText = streak;
+      document.getElementById("messageBox").innerText = streakMessage();
+      loadQuestion();
+    } else {
+      document.getElementById("messageBox").innerText = "❌ Salah! Jawabannya: " + correct;
+      streak = 0;
+      document.getElementById("streakNum").innerText = 0;
+      loadQuestion();
+    }
+  }
+
+  function resetGame() {
+    streak = 0;
+    document.getElementById("streakNum").innerText = 0;
+    document.getElementById("messageBox").innerText = "";
+    loadQuestion();
+  }
+
+  loadQuestion();
+</script>
+
+</body>
+</html>

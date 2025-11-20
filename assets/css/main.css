@@ -55,15 +55,15 @@ a:hover {
 /* ==================================== */
 
 .header {
-	display: flex;
-	justify-content: space-between;
+	display: flex; /* Untuk mensejajarkan kiri dan kanan */
+	justify-content: space-between; /* Memisahkan header-left dan header-right */
 	align-items: center;
 	padding: 10px 30px;
-	position: fixed;
+	position: fixed; /* KRITIS: Membuat header menempel di atas */
 	top: 0;
 	left: 0;
 	width: 100%;
-	z-index: 1030;
+	z-index: 1030; /* Penting agar selalu di atas konten lain */
 	min-height: 60px;
 	background-color: var(--bg-white);
 	color: var(--text-dark);

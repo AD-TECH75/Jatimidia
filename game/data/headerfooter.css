@@ -1,0 +1,161 @@
+/* Palet Warna Jawa Timur - Minimalis (Variabel yang Dipakai di Header) */
+:root {
+	--primary-color: #00563f; /* Hijau Tua */
+	--accent-color: #ffc300; /* Kuning Emas (untuk theme-toggle & hover) */
+	--bg-light: #f0f0f0; /* Background Area Bersih (untuk hover) */
+	--bg-white: #ffffff; /* Background Header (Putih Murni) */
+	--text-dark: #212529; /* Teks Gelap Standar */
+	--border-soft: #dee2e6; /* Garis batas halus */
+}
+
+/* FIX: Padding yang cukup tinggi untuk body agar konten tidak tertutup header fixed */
+body {
+	padding-top: 70px;
+}
+
+/* ==================================== */
+/* 1. HEADER & NAVIGASI ATAS (FIXED & MINIMALIS) */
+/* ==================================== */
+
+.header {
+	display: flex; /* Untuk mensejajarkan kiri dan kanan */
+	justify-content: space-between; /* Memisahkan header-left dan header-right */
+	align-items: center;
+	padding: 10px 30px;
+	position: fixed; /* KRITIS: Membuat header menempel di atas */
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1030; /* Penting agar selalu di atas konten lain */
+	min-height: 60px;
+	background-color: var(--bg-white);
+	color: var(--text-dark);
+	border-bottom: 1px solid var(--border-soft);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Penataan Konten Kiri (Logo & Judul) */
+.header-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.header-left .logo {
+	font-size: 1.1em;
+	font-weight: 700;
+	color: var(--primary-color);
+	width: 35px;
+	height: 35px;
+	object-fit: contain;
+}
+
+.region-title {
+	font-size: 1.1em;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: var(--text-dark);
+	margin: 0;
+}
+
+/* Penataan Konten Kanan (Navigasi & Tema) */
+.header-right {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.nav-link {
+	color: var(--text-dark);
+	font-weight: 500;
+	padding: 5px 10px;
+	border-radius: 4px;
+	transition: all 0.2s;
+	font-size: 0.9em;
+}
+
+.nav-link:hover {
+	color: var(--primary-color);
+	background-color: var(--bg-light);
+}
+
+.theme-toggle {
+	font-size: 1.4em;
+	cursor: pointer;
+	color: var(--accent-color);
+}
+
+/* Media Query untuk Desktop */
+@media (min-width: 768px) {
+	.header {
+		padding: 10px 60px;
+	}
+}
+
+/* ==================================== */
+/* 2. FOOTER (SIMPLE & MINIMALIS) */
+/* ==================================== */
+
+.footer {
+    box-shadow: 
+        0 -8px 15px rgba(0, 0, 0, 0.1);
+    /* Gunakan warna background/teks yang kontras tapi tetap elegan */
+    background-color: white; /* Background Hijau Tua */
+    color: var(--bg-white); /* Teks Putih */
+    padding: 30px 30px;
+    
+    /* Display Flex untuk penataan konten */
+    display: flex;
+    flex-direction: column; /* Default: susun ke bawah untuk mobile */
+    align-items: center; /* Konten di tengah */
+    text-align: center;
+    
+    /* Pastikan footer berada di paling bawah */
+    width: 100%;
+    margin-top: auto; /* Ini penting kalau pakai body { min-height: 100vh; display: flex; flex-direction: column; } */
+}
+
+/* Bagian Hak Cipta */
+.footer-copyright {
+    font-size: 0.9em;
+    font-weight: 400;
+    margin-top: 15px;
+    opacity: 0.8; /* Sedikit transparan agar tidak terlalu mendominasi */
+}
+
+/* Bagian Social Media/Link Cepat */
+.footer-links {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 15px;
+}
+
+.footer-link,
+.footer-link-icon {
+    color: var(--accent-color); /* Warna Kuning Emas untuk link/icon */
+    font-size: 1.2em;
+    transition: color 0.2s;
+}
+
+.footer-link:hover,
+.footer-link-icon:hover {
+    color: var(--bg-light); /* Hover ke warna Background Area Bersih (biar ada kontras) */
+}
+
+/* Media Query untuk Desktop: Ubah tata letak menjadi horizontal */
+@media (min-width: 768px) {
+    .footer {
+        flex-direction: row; /* Susun ke samping */
+        justify-content: space-between; /* Pisahkan kiri dan kanan */
+        padding: 20px 60px;
+    }
+    
+    .footer-links {
+        margin-bottom: 0;
+    }
+
+    .footer-copyright {
+        margin-top: 0;
+    }
+}

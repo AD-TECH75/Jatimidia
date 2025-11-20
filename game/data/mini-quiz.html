@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuis Jawa Timur – Win Streak</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="headerfooter.css">
+<style>
+    /* Global Reset & Base */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif; /* Ganti font */
+    }
+    
+    body {
+        background: #f0f4f8; /* Warna background lebih lembut */
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* 🧱 KUNCI SENTRALISASI & MAX-WIDTH 🧱 */
+    main {
+        flex-grow: 1;
+        max-width: 700px; /* Batasan Lebar Maksimal dibuat sedikit lebih lebar dari 600px default-mu */
+        width: 100%;
+        margin: 0 auto; /* Sentralisasi Horizontal */
+        padding: 20px;
+    }
+    
+    /* HEADER & FOOTER (Kosong) */
+    header, footer {
+        background: #ffffff; 
+        padding: 10px 20px;
+        text-align: center;
+        border-top: 1px solid #e0e0e0;
+        font-size: 0.8rem;
+        color: #999;
+    }
+    header { border-bottom: 1px solid #e0e0e0; }
+
+    /* Judul */
+    h2 { 
+        text-align: center; 
+        color: #007bff; /* Warna judul biru */
+        margin-bottom: 30px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Box Pertanyaan */
+    .question-box {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        /* Shadow lebih elegan */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
+        margin-bottom: 25px;
+    }
+    .question-box p#question {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        line-height: 1.5;
+        color: #2c3e50;
+    }
+
+    /* Jawaban */
+    #answers button {
+        /* Styling tombol lebih modern */
+        width: 100%;
+        padding: 14px 20px;
+        margin: 8px 0;
+        font-size: 1rem;
+        font-weight: 600;
+        border: 2px solid #007bff; /* Border biru sebagai default */
+        background: white;
+        color: #007bff;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    #answers button:hover {
+        background: #e9f5ff;
+        border-color: #0056b3;
+    }
+    
+    /* Streak Counter */
+    h3 {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #28a745;
+    }
+    h3 span#streak {
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: #ffc107; /* Warna kuning untuk angka streak */
+        margin-left: 5px;
+    }
+
+    /* Tombol Reset */
+    .reset-btn {
+        background: #dc3545; /* Merah cerah */
+        color: white;
+        margin-top: 10px;
+        border: none;
+        box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+    }
+    .reset-btn:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+    }
+    
+    /* Hasil Box */
+    textarea#resultBox {
+        width: 100%;
+        height: 80px;
+        margin-top: 25px;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        background: #fff;
+        font-size: 0.95rem;
+        resize: none; /* Nonaktifkan resize */
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* Feedback Warna */
+    .correct-btn { 
+        background: #28a745 !important; /* Hijau */
+        color: white !important; 
+        border-color: #28a745 !important;
+    }
+    .wrong-btn { 
+        background: #dc3545 !important; /* Merah */
+        color: white !important; 
+        border-color: #dc3545 !important;
+    }
+
+    /* Media Query untuk HP: Sedikit penyesuaian padding */
+    @media screen and (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+        main {
+            padding: 10px;
+        }
+        h2 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+    <header class="header">
+      <div class="header-left">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg"
+          alt="Logo Jawa Timur"
+          class="logo"
+        />
+
+        <h1 class="region-title">jawa timur</h1>
+      </div>
+
+      <div class="header-right">
+        <a href="#" class="nav-link">beranda</a>
+
+        <a href="#about" class="nav-link">About</a>
+
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </header>
+
+    <main>
+        <h2>🗺️ Kuis Jawa Timur – Win Streak Challenge</h2>
+
+        <div class="question-box">
+            <p id="question">Memuat soal...</p>
+            <div id="answers"></div>
+        </div>
+
+        <h3>✔ Win Streak: <span id="streak">0</span></h3>
+
+        <button class="reset-btn" onclick="resetGame()">Ulangi Kuis (Reset)</button>
+
+        <textarea id="resultBox" placeholder="Hasil akan muncul di sini... Win Streak kamu akan tercatat di sini!" readonly></textarea>
+    </main>
+
+    <footer></footer>
+
+<script>
+// ==============================
+// 30 Pertanyaan
+// c = index jawaban benar
+// ==============================
+const questions = [
+    {q:"Ibu kota Provinsi Jawa Timur adalah?", a:["Surabaya","Malang","Sidoarjo","Madiun"], c:0},
+    {q:"Gunung terkenal di Jawa Timur yang berada di kawasan Tengger adalah?", a:["Bromo","Merapi","Rinjani","Ijen"], c:0},
+    {q:"Tari tradisional khas Surabaya adalah?", a:["Tari Remo","Tari Jaipong","Tari Piring","Tari Saman"], c:0},
+    {q:"Makanan khas Jawa Timur berkuah hitam adalah?", a:["Rawon","Soto Banjar","Coto Makassar","Gulai"], c:0},
+    {q:"Kota yang dijuluki 'Kota Apel' adalah?", a:["Batu","Kediri","Lamongan","Tuban"], c:0},
+    {q:"Pulau Madura terkenal dengan makanan apa?", a:["Sate Madura","Pempek","Gudeg","Sate Padang"], c:0},
+    {q:"Kawasan hutan savana terkenal di Banyuwangi adalah?", a:["Baluran","Meru Betiri","Taman Nasional Ujung Kulon","Kelimutu"], c:0},
+    {q:"Reog adalah kesenian khas daerah mana?", a:["Ponorogo","Blitar","Jember","Kediri"], c:0},
+    {q:"Gunung Ijen terkenal karena?", a:["Blue Fire","Salju","Danau Hijau","Batu Raksasa"], c:0},
+    {q:"Jembatan Suramadu menghubungkan Surabaya dengan?", a:["Madura","Lombok","Bali","Sumba"], c:0},
+    {q:"Pantai terkenal di Malang Selatan adalah?", a:["Balekambang","Kuta","Nihiwatu","Losari"], c:0},
+    {q:"Tari Gandrung berasal dari?", a:["Banyuwangi","Tulungagung","Malang","Pamekasan"], c:0},
+    {q:"Kota Kediri terkenal dengan produk apa?", a:["Tahu Takwa","Pempek","Kacang","Batik"], c:0},
+    {q:"Festival Jember terkenal dengan?", a:["Fashion Carnaval","Karapan Sapi","Reog","Batik"], c:0},
+    {q:"Bandara Internasional di Jawa Timur adalah?", a:["Juanda","Ngurah Rai","Adi Sucipto","Kertajati"], c:0},
+    {q:"Kota yang dijuluki Kota Santri adalah?", a:["Jombang","Ngawi","Magetan","Situbondo"], c:0},
+    {q:"Makanan khas Lamongan adalah?", a:["Soto Lamongan","Gudeg","Rawon Setan","Pempek"], c:0},
+    {q:"Karapan Sapi merupakan tradisi dari?", a:["Madura","Bali","Lombok","Sumba"], c:0},
+    {q:"Gunung tertinggi di Jawa Timur adalah?", a:["Semeru","Arjuno","Wilis","Penanggungan"], c:0},
+    {q:"Kota Blitar terkenal sebagai tempat makam?", a:["Bung Karno","Cut Nyak Dien","Diponegoro","Sisingamangaraja"], c:0},
+    {q:"Kota dengan ikon Singa Barong adalah?", a:["Ponorogo","Madiun","Lamongan","Tuban"], c:0},
+    {q:"Museum Angkut berada di kota?", a:["Batu","Blitar","Ngawi","Tulungagung"], c:0},
+    {q:"Batik Madura terkenal karena motif?", a:["Ceraha & Berani","Liris & Sogan","Mega Mendung","Sido Mukti"], c:0},
+    {q:"Kota Reog adalah?", a:["Ponorogo","Magetan","Probolinggo","Lamongan"], c:0},
+    {q:"Ranu Kumbolo berada di gunung?", a:["Semeru","Welirang","Merbabu","Arjuno"], c:0},
+    {q:"Kota Probolinggo terkenal dengan buah?", a:["Mangga","Durian","Anggur","Nanas"], c:0},
+    {q:"Tulungagung terkenal dengan produksi?", a:["Marmer","Beras","Minyak","Tembakau"], c:0},
+    {q:"Kota Situbondo terkenal dengan kawasan?", a:["Baluran","Rinjani","Bromo","Ijen"], c:0},
+    {q:"Kota Gresik dikenal sebagai?", a:["Kota Santri & Industri","Kota Apel","Kota Wisata","Kota Budaya"], c:0},
+    {q:"Pulau kecil dekat Banyuwangi adalah?", a:["Tabuhan","Derawan","Weh","Lembeh"], c:0}
+];
+
+let streak = 0;
+let currentQuestion;
+
+// Fungsi untuk mengacak array (Durstenfeld shuffle)
+function shuffleArray(array) {
+    let arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// Muat pertanyaan + acak jawaban
+function loadQuestion() {
+    // Hapus semua kelas feedback dari tombol sebelumnya
+    const existingButtons = document.querySelectorAll('#answers button');
+    existingButtons.forEach(btn => {
+        btn.classList.remove("correct-btn", "wrong-btn");
+        btn.disabled = false; // Aktifkan lagi tombolnya
+    });
+
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    const q = questions[randomIndex];
+
+    document.getElementById("question").innerText = q.q;
+
+    const answerBox = document.getElementById("answers");
+    answerBox.innerHTML = "";
+
+    // data jawaban lengkap sebelum dicampur
+    const allAnswers = q.a.map((ans, i) => ({
+        text: ans,
+        correct: i === q.c
+    }));
+
+    // acak posisi jawaban
+    const shuffled = shuffleArray(allAnswers);
+
+    // render tombol jawaban
+    shuffled.forEach(item => {
+        const btn = document.createElement("button");
+        btn.innerText = item.text;
+        btn.onclick = () => checkAnswer(item.correct, btn);
+        answerBox.appendChild(btn);
+    });
+}
+
+// Cek jawaban
+function checkAnswer(isCorrect, button) {
+    // Nonaktifkan semua tombol setelah menekan salah satu
+    const allButtons = document.querySelectorAll('#answers button');
+    allButtons.forEach(btn => btn.disabled = true);
+    
+    // Cari jawaban yang benar untuk diberi feedback
+    const correctButton = Array.from(allButtons).find(btn => {
+        // Ini perlu sedikit trik karena info "correct" hilang setelah render
+        // Tapi karena tombol yang benar akan selalu diberi class "correct-btn"
+        // kita bisa tambahkan logika sederhana di sini jika ingin menunjukkan jawaban benar
+        // Tapi untuk saat ini kita biarkan seperti kode aslimu: hanya menunjukkan yang salah/benar diklik
+        // Untuk menunjukkan jawaban yang benar, perlu sedikit perubahan di fungsi loadQuestion/checkAnswer
+        // Contoh: cari data yang benar dari `q` dan berikan class `correct-btn` ke teks yang sesuai
+        return false; // Matikan pencarian ini dulu
+    });
+
+    if (isCorrect) {
+        streak++;
+        document.getElementById("streak").innerText = streak;
+        button.classList.add("correct-btn");
+        setTimeout(loadQuestion, 800);
+    } else {
+        button.classList.add("wrong-btn");
+        
+        // Tambahkan logika untuk menunjukkan jawaban yang benar setelah salah
+        const currentQ = questions.find(q => q.q === document.getElementById("question").innerText);
+        if (currentQ) {
+            const correctAnswerText = currentQ.a[currentQ.c];
+            Array.from(allButtons).find(btn => btn.innerText === correctAnswerText).classList.add("correct-btn");
+        }
+        
+        document.getElementById("resultBox").value =
+            "❌ Jawaban salah.\n\nWin streak kamu terhenti di: " + streak + ".\n\nCoba lagi untuk pecahkan rekor!";
+        
+        streak = 0;
+        document.getElementById("streak").innerText = streak;
+        setTimeout(loadQuestion, 2000); // Durasi lebih lama biar sempat baca jawaban benar
+    }
+}
+
+// Reset game
+function resetGame() {
+    streak = 0;
+    document.getElementById("streak").innerText = streak;
+    document.getElementById("resultBox").value = "🔄 Game di-reset. Semangat lagi! Rekor menantimu!";
+    loadQuestion();
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>

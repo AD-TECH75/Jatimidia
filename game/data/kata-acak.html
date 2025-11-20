@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Kata Acak</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="headerfooter.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f5f6fa;
+      padding: 30px;
+      color: #2c3e50;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #34495e;
+    }
+
+    .scramble {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      background: #ecf0f1;
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: 2px solid #ddd;
+      outline: none;
+      margin-bottom: 20px;
+      transition: 0.2s;
+    }
+    input:focus {
+      border-color: #3498db;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin: 5px;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    .streak {
+      font-size: 1.2rem;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #8e44ad;
+      min-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+    <header class="header">
+      <div class="header-left">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg"
+          alt="Logo Jawa Timur"
+          class="logo"
+        />
+
+        <h1 class="region-title">jawa timur</h1>
+      </div>
+
+      <div class="header-right">
+        <a href="#" class="nav-link">beranda</a>
+
+        <a href="#about" class="nav-link">About</a>
+
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </header>
+<> 
+<div class="container">
+  <h1>Game Kata Acak</h1>
+
+  <div class="scramble" id="scrambleBox">????</div>
+
+  <input type="text" id="answerInput" placeholder="Tebak kata..." autocomplete="off">
+
+  <div>
+    <button onclick="checkAnswer()">Kirim Jawaban</button>
+    <button onclick="resetGame()">Reset</button>
+  </div>
+
+  <div class="streak">Winstreak: <span id="streak">0</span></div>
+
+  <div class="message" id="messageBox"></div>
+</div>
+</body>
+<footer>
+
+</footer>
+<script>
+  const words = [
+    "surabaya","malang","jember","banyuwangi","madiun","kediri",
+    "bojonegoro","tulungagung","sidoarjo","gresik","lamongan","tuban",
+    "ponorogo","probolinggo","blitar","nganjuk","pasuruan","magetan",
+    "bangkalan","sumenep","bondowoso","situbondo","trenggalek",
+    "pacitan","ngawi","mojokerto","lumajang","pamekasan",
+    "kaliandra","semrawut"
+  ];
+
+  let currentWord = "";
+  let scrambled = "";
+  let streak = 0;
+
+  function shuffle(word) {
+    let arr = word.split("");
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join("");
+  }
+
+  function pickNewWord() {
+    currentWord = words[Math.floor(Math.random() * words.length)];
+    scrambled = shuffle(currentWord);
+
+    // pastikan tidak sama persis
+    if (scrambled === currentWord) return pickNewWord();
+
+    document.getElementById("scrambleBox").innerText = scrambled;
+    document.getElementById("answerInput").value = "";
+  }
+
+  function streakMessage() {
+    if (streak >= 10) return "🔥 GILA! Kamu master kata acak!";
+    if (streak >= 7) return "⚡ Luar biasa! Kamu sangat cepat!";
+    if (streak >= 5) return "🔥 Mantap! Streak kamu bagus!";
+    if (streak >= 3) return "✨ Kamu mulai panas!";
+    return "Ayo lanjut!";
+  }
+
+  function checkAnswer() {
+    const answer = document.getElementById("answerInput").value.trim().toLowerCase();
+
+    if (answer === currentWord.toLowerCase()) {
+      streak++;
+      document.getElementById("streak").innerText = streak;
+      document.getElementById("messageBox").innerText = streakMessage();
+      pickNewWord();
+    } else {
+      document.getElementById("messageBox").innerText = "❌ Salah! Jawabannya: " + currentWord;
+      streak = 0;
+      document.getElementById("streak").innerText = streak;
+      pickNewWord();
+    }
+  }
+
+  function resetGame() {
+    streak = 0;
+    document.getElementById("streak").innerText = "0";
+    document.getElementById("messageBox").innerText = "";
+    pickNewWord();
+  }
+
+  pickNewWord();
+</script>
+</body>
+</html>

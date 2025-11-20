@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tebak Kata Misteri</title>
+    <link rel="stylesheet" href="headerfooter.css">
+    <style>
+      body {
+        background: #f4f6fc;
+        font-family: "Poppins", sans-serif;
+        padding: 30px;
+        color: #333;
+      }
+
+      .game-container {
+        max-width: 600px;
+        margin: auto;
+        background: #fff;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      h2 {
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #2c3e50;
+      }
+
+      .hint-box {
+        background: #eef3ff;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border-left: 5px solid #637bff;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #bbb;
+        margin-top: 10px;
+        font-size: 16px;
+      }
+
+      button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background: #5468ff;
+        color: white;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #4456e0;
+      }
+
+      .result {
+        margin-top: 20px;
+        font-weight: 600;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="hero-image-section">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+          <h1 class="hero-title">Jawa Timur</h1>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="game-container">
+        <h2>Tebak Kata Misteri</h2>
+
+        <div class="hint-box" id="hintBox">Petunjuk akan muncul di sini...</div>
+
+        <input
+          type="text"
+          id="answerInput"
+          placeholder="Tulis jawaban kamu..."
+        />
+
+        <button onclick="checkAnswer()">Kirim Jawaban</button>
+
+        <div class="result" id="resultBox"></div>
+      </div>
+    </main>
+    <footer></footer>
+
+    <script>
+      const words = [
+        {
+          word: "surabaya",
+          hint: [
+            "Kota terbesar di Jawa Timur",
+            "Dijuluki Kota Pahlawan",
+            "Pusat pemerintahan provinsi",
+          ],
+        },
+        {
+          word: "malang",
+          hint: ["Kota berhawa sejuk", "Dekat Batu", "Terkenal apel"],
+        },
+        {
+          word: "bromo",
+          hint: ["Gunung terkenal", "Destinasi wisata", "Punya lautan pasir"],
+        },
+        {
+          word: "majapahit",
+          hint: ["Kerajaan besar", "Berpusat di Jawa Timur", "Era Gajah Mada"],
+        },
+        {
+          word: "rawon",
+          hint: ["Makanan khas Jawa Timur", "Kuah hitam", "Berbahan kluwek"],
+        },
+        {
+          word: "madura",
+          hint: ["Pulau", "Dekat Jawa Timur", "Terkenal sate"],
+        },
+        {
+          word: "blitar",
+          hint: [
+            "Nama kota",
+            "Tempat makam pahlawan nasional",
+            "Presiden pertama Indonesia",
+          ],
+        },
+        {
+          word: "jember",
+          hint: [
+            "Kota kabupaten",
+            "Terkenal Jember Fashion Carnaval",
+            "Dari Jawa Timur",
+          ],
+        },
+        {
+          word: "bojonegoro",
+          hint: [
+            "Kabupaten",
+            "Daerah penghasil minyak",
+            "Jawa Timur bagian barat",
+          ],
+        },
+        {
+          word: "kediri",
+          hint: ["Kota", "Ada pabrik gula besar", "Dekat Gunung Kelud"],
+        },
+        {
+          word: "lamongan",
+          hint: ["Kabupaten", "Soto terkenal dari sini", "Dekat Gresik"],
+        },
+        {
+          word: "tulungagung",
+          hint: ["Kabupaten", "Pusat marmer", "Dekat Blitar"],
+        },
+        {
+          word: "ponorogo",
+          hint: ["Kabupaten", "Asal kesenian Reog", "Dekat Madiun"],
+        },
+        {
+          word: "probolinggo",
+          hint: ["Kabupaten & kota", "Dekat Bromo", "Daerah pesisir"],
+        },
+        {
+          word: "nganjuk",
+          hint: ["Kabupaten", "Julukan Kota Angin", "Pertengahan Jatim"],
+        },
+        {
+          word: "sidoarjo",
+          hint: ["Dekat Surabaya", "Delta", "Bandeng presto terkenal"],
+        },
+        {
+          word: "gresik",
+          hint: ["Kota industri", "Ada Semen Gresik", "Dekat Surabaya"],
+        },
+        {
+          word: "tuban",
+          hint: ["Kabupaten", "Daerah pesisir utara", "Dekat Jateng"],
+        },
+        {
+          word: "magetan",
+          hint: ["Kabupaten", "Ada Telaga Sarangan", "Dingin"],
+        },
+        {
+          word: "trenggalek",
+          hint: ["Kabupaten", "Pantai selatan", "Dikelilingi pegunungan"],
+        },
+        {
+          word: "pasuruan",
+          hint: ["Kabupaten & kota", "Dekat Pandaan", "Wilayah industri"],
+        },
+        {
+          word: "mojokerto",
+          hint: [
+            "Dekat Surabaya",
+            "Dekat situs Majapahit",
+            "Wilayah kota berkembang",
+          ],
+        },
+        {
+          word: "banyuwangi",
+          hint: [
+            "Kabupaten paling timur",
+            "Ijen ada di sini",
+            "Sering disebut Sunrise of Java",
+          ],
+        },
+        {
+          word: "pamekasan",
+          hint: ["Kabupaten Madura", "Dekat Sumenep", "Banyak kuliner khas"],
+        },
+        {
+          word: "sumenep",
+          hint: [
+            "Kabupaten pulau Madura",
+            "Punya banyak pantai indah",
+            "Dekat Pamekasan",
+          ],
+        },
+        {
+          word: "bangkalan",
+          hint: ["Kabupaten di Madura", "Dekat Suramadu", "Barat Madura"],
+        },
+        {
+          word: "bondowoso",
+          hint: ["Kabupaten", "Dekat Ijen", "Tetangga Banyuwangi"],
+        },
+        {
+          word: "situbondo",
+          hint: ["Pesisir utara", "Dekat Baluran", "Wilayah kabupaten"],
+        },
+        {
+          word: "lumajang",
+          hint: ["Kabupaten", "Dekat Semeru", "Banyak air terjun"],
+        },
+        {
+          word: "madiun",
+          hint: ["Kota & kabupaten", "Terkenal pecel", "Dekat Ponorogo"],
+        },
+      ];
+
+      let currentIndex = 0;
+
+      function loadWord() {
+        const item = words[currentIndex];
+        document.getElementById(
+          "hintBox"
+        ).innerHTML = `<b>Petunjuk:</b><br>• ${item.hint[0]}<br>• ${item.hint[1]}<br>• ${item.hint[2]}`;
+      }
+
+      function checkAnswer() {
+        const userAns = document
+          .getElementById("answerInput")
+          .value.toLowerCase()
+          .trim();
+        const correct = words[currentIndex].word;
+
+        if (userAns === correct) {
+          document.getElementById("resultBox").innerHTML = "✔️ Benar!";
+          currentIndex++;
+
+          if (currentIndex < words.length) {
+            setTimeout(() => {
+              document.getElementById("resultBox").innerHTML = "";
+              document.getElementById("answerInput").value = "";
+              loadWord();
+            }, 1000);
+          } else {
+            document.getElementById("resultBox").innerHTML =
+              "🎉 Kamu telah menyelesaikan semua kata!";
+          }
+        } else {
+          document.getElementById("resultBox").innerHTML =
+            "❌ Salah, coba lagi!";
+        }
+      }
+
+      loadWord();
+    </script>
+  </body>
+</html>

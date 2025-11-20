@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halaman Tombol Game Edukatif</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="data/headerfooter.css" />
+
+    <style>
+      /* BASE & RESET */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #f5f6fa;
+        color: #2c3e50;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* 🧱 KUNCI SENTRALISASI & MAX-WIDTH 🧱 */
+      main {
+        flex-grow: 1;
+        max-width: 1000px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* HEADER & FOOTER Styling */
+      header,
+      footer {
+        background: #ffffff;
+        color: #6366f1;
+        padding: 15px 20px;
+        text-align: center;
+        border-top: 1px solid #eee;
+      }
+      header {
+        border-bottom: 1px solid #eee;
+        font-weight: 700;
+      }
+
+      /* CONTENT STYLING */
+      .page-title {
+        text-align: center;
+        font-size: 2.2rem;
+        margin: 30px 0 50px 0;
+        font-weight: 700;
+        color: #34495e;
+      }
+
+      /* Layout Grid untuk Mobile dan Desktop */
+      .game-grid {
+        display: grid;
+        gap: 25px;
+        padding-bottom: 50px;
+      }
+
+      /* Media Query: Terapkan 2 kolom di layar desktop */
+      @media screen and (min-width: 768px) {
+        .game-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Wrapper box */
+      .section-box {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        text-align: center;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .section-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-box h2 {
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #34495e;
+      }
+
+      /* Big Button */
+      .game-btn {
+        display: inline-block;
+        padding: 14px 26px;
+        background: #6366f1;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: 0.3s;
+        margin-top: 10px;
+        border: none;
+        box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+      }
+
+      .game-btn:hover {
+        background: #4f46e5;
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header-left">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg"
+          alt="Logo Jawa Timur"
+          class="logo"
+        />
+
+        <h1 class="region-title">jawa timur</h1>
+      </div>
+
+      <div class="header-right">
+        <a href="#" class="nav-link">beranda</a>
+
+        <a href="#about" class="nav-link">About</a>
+
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="page-title">🕹️ Koleksi Game Edukatif Seru!</h1>
+      <p>
+        Mainkan game seru untuk mengasah pengetahuanmu tentang Provinsi tercinta
+        kita!
+      </p>
+
+      <div class="game-grid">
+        <section class="section-box">
+          <h2>Mini Kuis Pilihan Ganda</h2>
+          <a href="data/mini-quiz.html" class="game-btn">Mulai Kuis</a>
+        </section>
+
+        <section class="section-box">
+          <h2>Matching Game</h2>
+          <a href="data/matching-game.html" class="game-btn"
+            >Main Matching Game</a
+          >
+        </section>
+
+        <section class="section-box">
+          <h2>Essay Quiz</h2>
+          <a href="data/essay-game.html" class="game-btn">Mulai Quiz Essay</a>
+        </section>
+        <section class="section-box">
+          <h2>Kata Acak</h2>
+          <a href="data/kata-acak.html" class="game-btn">Main Kata Acak</a>
+        </section>
+        <section class="section-box">
+          <h2>Siapa Aku?</h2>
+          <a href="data/siapa-aku.html" class="game-btn">Main Siapa Aku?</a>
+        </section>
+        <section class="section-box">
+          <h2>Tebak Kata</h2>
+          <a href="data/tebak-kata.html" class="game-btn">Main Tebak Kata</a>
+        </section>
+      </div>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

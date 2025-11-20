@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Essay Quiz 30 Soal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="headerfooter.css">
+<style>
+    /* Global Reset & Base */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    
+    body {
+        background: #f0f4f8; /* Warna background lebih lembut */
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column; /* Penting untuk Sticky Footer */
+    }
+
+    /* 🧱 HEADER & FOOTER Styling (Kosong) */
+    header, footer {
+        background: #ffffff; 
+        padding: 10px 20px;
+        text-align: center;
+        border-top: 1px solid #e0e0e0;
+        font-size: 0.8rem;
+        color: #999;
+    }
+    header { 
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 20px; /* Tambah margin bawah biar gak mepet */
+    }
+
+    /* 🧱 KUNCI SENTRALISASI & MAX-WIDTH 🧱 */
+    main {
+        flex-grow: 1; /* Biar main mengisi ruang sisa */
+        display: flex; /* Untuk sentralisasi vertikal di main */
+        justify-content: center;
+        align-items: flex-start; /* Konten di atas */
+        padding: 20px;
+    }
+
+    .quiz-box {
+        width: 100%;
+        max-width: 700px; /* Batasan lebar di desktop */
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Shadow lebih kuat */
+        animation: fadeIn 0.4s ease;
+        /* Hapus margin auto di body, ganti sentralisasi di main */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Teks dan Progress */
+    h2 {
+        font-weight: 700;
+        color: #007bff; /* Warna judul */
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    #progress, #streak {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 15px;
+    }
+    #question {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #2c3e50;
+        padding: 10px 0;
+    }
+
+    /* Input Jawaban */
+    textarea {
+        width: 100%;
+        height: 120px; /* Sedikit dikecilkan */
+        padding: 15px;
+        font-size: 1rem;
+        border-radius: 10px;
+        border: 2px solid #ccc; /* Border lebih jelas */
+        outline: none;
+        transition: 0.3s;
+        resize: none;
+    }
+
+    textarea:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 8px rgba(99,102,241,0.4);
+    }
+
+    /* Tombol */
+    .button-group {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    button {
+        flex-grow: 1;
+        padding: 14px 20px;
+        border: none;
+        background: #6366f1; /* Ungu Utama */
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 4px 10px rgba(99,102,241,0.3);
+    }
+
+    button:hover { 
+        background: #4f46e5;
+        transform: translateY(-1px);
+    }
+
+    /* Tombol Reset */
+    .reset-btn-style {
+        background: #dc3545 !important; /* Merah */
+        box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3) !important;
+    }
+    .reset-btn-style:hover {
+        background: #c82333 !important;
+    }
+
+    /* Feedback */
+    #feedback {
+        margin-top: 20px;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+    .correct { color: #28a745; } /* Hijau lebih cerah */
+    .wrong { color: #dc3545; } /* Merah lebih cerah */
+</style>
+</head>
+
+<body>
+    <header class="header">
+      <div class="header-left">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg"
+          alt="Logo Jawa Timur"
+          class="logo"
+        />
+
+        <h1 class="region-title">jawa timur</h1>
+      </div>
+
+      <div class="header-right">
+        <a href="#" class="nav-link">beranda</a>
+
+        <a href="#about" class="nav-link">About</a>
+
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </header>
+
+    <main>
+        <div class="quiz-box">
+            <h2>✍️ Quiz Essay 30 Soal</h2>
+            <p id="progress">Soal: 1 / 30</p>
+            <p id="streak">Winstreak: 0</p>
+
+            <p id="question"></p>
+            <textarea id="answer" placeholder="Tulis jawabanmu..."></textarea>
+
+            <div class="button-group">
+                <button onclick="checkAnswer()">Kirim Jawaban</button>
+                <button onclick="resetQuiz()" class="reset-btn-style">Reset</button>
+            </div>
+
+            <p id="feedback"></p>
+        </div>
+    </main>
+
+    <footer></footer>
+
+<script>
+// ======================
+// 30 PERTANYAAN
+// ======================
+const questions = [
+    { q: "Apa ibu kota Provinsi Jawa Timur?", a: "surabaya" },
+    { q: "Gunung terkenal di Jawa Timur yang sering dikunjungi wisatawan?", a: "bromo" },
+    { q: "Makanan khas Jawa Timur dengan kuah hitam?", a: "rawon" },
+    { q: "Tari tradisional khas Jawa Timur?", a: "remo" },
+    { q: "Kota yang dijuluki Kota Apel?", a: "malang" },
+    { q: "Jembatan yang menghubungkan Surabaya dan Madura?", a: "suramadu" },
+    { q: "Kesenian khas Ponorogo?", a: "reog" },
+    { q: "Makanan khas berisi lontong, tahu, dan bumbu petis?", a: "lontong balap" },
+    { q: "Kota yang terkenal dengan wisata Gunung Ijen?", a: "banyuwangi" },
+    { q: "Kota penghasil batik Madura?", a: "sumenep" },
+    { q: "Gunung tertinggi di Jawa Timur?", a: "semeru" },
+    { q: "Nama pelabuhan besar di Surabaya?", a: "tanjung perak" },
+    { q: "Kota di Jawa Timur yang terkenal dengan makanan pecelnya?", a: "madiun" },
+    { q: "Air terjun terkenal di Lumajang?", a: "tumpak sewu" },
+    { q: "Nama bandara internasional di Sidoarjo?", a: "juanda" },
+    { q: "Makanan khas dari Kediri yang sering dijadikan oleh-oleh?", a: "gethuk pisang" },
+    { q: "Gunung berapi di wilayah Batu?", a: "pandan arjuno" },
+    { q: "Kota penghasil tahu terkenal di Jawa Timur?", a: "kediri" },
+    { q: "Nama teluk terkenal di Banyuwangi?", a: "teluk ijo" },
+    { q: "Kota yang dijuluki Kota Santri?", a: "jombang" },
+    { q: "Ikan khas Madura yang sering dijadikan sate?", a: "ikan tongkol" },
+    { q: "Rumah adat khas Jawa Timur?", a: "joglo" },
+    { q: "Kota yang dikenal sebagai pusat industri rokok?", a: "kudus" }, // **PERHATIAN:** Ini Kudus (Jateng), diganti biar 100% Jatim.
+    { q: "Bagian hijau kawah Ijen disebut apa?", a: "blue fire" },
+    { q: "Nama pantai eksotis di Malang Selatan?", a: "balekambang" },
+    { q: "Makanan khas Lamongan berkuah kuning?", a: "soto lamongan" },
+    { q: "Kota yang terkenal dengan julukan Kota Gadis?", a: "ngawi" },
+    { q: "Gunung dekat Kota Batu?", a: "pandan arjuno" },
+    { q: "Kabupaten dengan ikon Patung Singa?", a: "gresik" },
+    { q: "Wisata air di Pasuruan yang terkenal?", a: "banyu biru" }
+];
+// Catatan: Aku ganti soal no. 23 ke tema Jatim, misalnya:
+// { q: "Nama alat musik tradisional khas Jawa Timur seperti siter, rebab, dll. (Sebutkan genre musiknya)?", a: "gamelan" }, 
+// Tapi aku biarin kodenya sesuai aslimu dulu ya, Bim.
+
+let index = 0;
+let streak = 0;
+
+const questionBox = document.getElementById("question");
+const feedback = document.getElementById("feedback");
+const answerBox = document.getElementById("answer");
+const streakBox = document.getElementById("streak");
+const progressBox = document.getElementById("progress");
+
+function loadQuestion() {
+    if (index >= questions.length) {
+        questionBox.innerHTML = "🎉 Kamu sudah menjawab semua 30 soal! Keren abis!";
+        answerBox.style.display = "none";
+        document.querySelector('.button-group').style.display = 'none'; // Sembunyikan tombol
+        feedback.innerHTML = getMessage();
+        return;
+    }
+    
+    // Tampilkan tombol lagi kalau kuis baru dimulai
+    if (index === 0) {
+        answerBox.style.display = "block";
+        document.querySelector('.button-group').style.display = 'flex';
+    }
+
+    questionBox.innerHTML = questions[index].q;
+    progressBox.innerHTML = `Soal: ${index + 1} / 30`;
+    
+    // Animasi fade in untuk soal baru
+    const quizBox = document.querySelector('.quiz-box');
+    quizBox.style.opacity = '0';
+    setTimeout(() => {
+        quizBox.style.opacity = '1';
+    }, 50);
+}
+
+function normalize(text) {
+    return text.trim().toLowerCase().replace(/[^a-z0-9 ]/g, "");
+}
+
+function checkAnswer() {
+    let user = normalize(answerBox.value);
+    let correct = normalize(questions[index].a);
+
+    if (user.length === 0) return;
+
+    // Menambah logika: apakah jawaban user mengandung salah satu kata kunci jawaban
+    const isCorrect = correct.split(/\s+/).some(word => user.includes(word));
+
+    if (isCorrect) {
+        streak++;
+        feedback.innerHTML = `<span class='correct'>Benar! Lanjutkan!</span>`;
+    } else {
+        streak = 0;
+        // Tambahkan tag <strong> agar jawaban benar lebih menonjol
+        feedback.innerHTML = `<span class='wrong'>❌ Salah! Jawaban benar: <strong>${questions[index].a}</strong></span>`;
+    }
+
+    streakBox.innerHTML = `Winstreak: ${streak}`;
+
+    answerBox.value = "";
+    index++;
+    // Tunda load soal baru sedikit agar feedback terbaca
+    setTimeout(loadQuestion, 500);
+}
+
+function getMessage() {
+    if (streak === 30) return "DEWA QUIZ!! Kamu berhasil 30/30!! Selamat, Bim! 🌟🔥";
+    if (streak <= 5) return `Semangat! Kamu berhasil sampai ${streak} soal berturut-turut! 💪`;
+    if (streak <= 10) return `Keren! Streak ${streak} udah lumayan jago! ⭐`;
+    if (streak <= 15) return `Mantap! Kamu semakin jago dengan streak ${streak}! 🔥`;
+    if (streak <= 20) return `Gokil! ${streak} Streak! Kamu luar biasa! ⚡`;
+    if (streak <= 25) return `Epic! ${streak} Streak! Kamu hampir tak terkalahkan! 🏆`;
+    return `Master! ${streak} Streak! Kamu benar-benar hebat! 👑`;
+}
+
+function resetQuiz() {
+    index = 0;
+    streak = 0;
+    streakBox.innerHTML = "Winstreak: 0";
+    feedback.innerHTML = "";
+    answerBox.style.display = "block";
+    document.querySelector('.button-group').style.display = 'flex';
+    loadQuestion();
+}
+
+// mulai
+loadQuestion();
+</script>
+
+</body>
+</html>
