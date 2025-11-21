@@ -1,18 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const currentTheme = localStorage.getItem('theme');
-  if (currentTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-  }
-});
-
-
-
-
-
-
-
-
-
 // ====================================================================
 // FUNGSI UTAMA SMOOTH SCROLL KUSTOM (SINE EASING)
 // Digunakan untuk navigasi menu dan tombol 'Scroll to Top'
@@ -163,6 +148,49 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", function () {
 	setupMapInteractivity();
 
+	const menuToggleBtn = document.getElementById("menu-toggle-btn");
+	const navLinks = document.getElementById("main-nav-links");
+	const body = document.body;
+
+	if (menuToggleBtn && navLinks) {
+		menuToggleBtn.addEventListener("click", () => {
+			// Toggle class 'open' pada tombol dan daftar link
+			menuToggleBtn.classList.toggle("open");
+			navLinks.classList.toggle("open");
+
+			// Opsional: mencegah scrolling body saat menu terbuka di HP
+			body.classList.toggle("menu-active");
+		});
+	}
+
+	// ====================================================================
+	// FUNGSI TOGGLE DROPDOWN NAVIGASI MOBILE (di dalam Hamburger)
+	// ====================================================================
+	const mobileDropdowns = document.querySelectorAll(
+		".mobile-district-nav .dropdown-item"
+	);
+
+	mobileDropdowns.forEach((item) => {
+		const toggle = item.querySelector(".nav-dropdown-toggle");
+		const content = item.querySelector(".dropdown-content");
+
+		toggle.addEventListener("click", (e) => {
+			e.preventDefault(); // Mencegah pindah halaman
+
+			// Toggle visibility dan ketinggian
+			if (content.style.height === "0px" || content.style.height === "") {
+				content.style.visibility = "visible";
+				content.style.opacity = "1";
+				// Hitung tinggi konten dan atur ketinggian (penting untuk animasi)
+				content.style.height = content.scrollHeight + "px";
+			} else {
+				content.style.height = "0px";
+				content.style.opacity = "0";
+				content.style.visibility = "hidden";
+			}
+		});
+	});
+
 	// CONFIG
 	const SCROLL_THRESHOLD_DROPDOWN = 250;
 	const SCROLL_VISIBILITY_THRESHOLD = 300;
@@ -282,46 +310,44 @@ function setupNavLikeSVG() {
 
 setupNavLikeSVG();
 
-
-const toggleButton = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
+const toggleButton = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
 const body = document.body;
-const darkIcon = '🌙'; // Ikon bulan
-const lightIcon = '☀️'; // Ikon matahari
+const darkIcon = "🌙"; // Ikon bulan
+const lightIcon = "☀️"; // Ikon matahari
 
 // 1. FUNGSI INTI: Menerapkan tema dan menyimpan ke Local Storage
 function applyTheme(isDark) {
-    if (isDark) {
-        body.classList.add('dark-mode');
-        themeIcon.textContent = darkIcon; // Ganti ikon jadi bulan
-        localStorage.setItem('theme', 'dark');
-    } else {
-        body.classList.remove('dark-mode');
-        themeIcon.textContent = lightIcon; // Ganti ikon jadi matahari
-        localStorage.setItem('theme', 'light');
-    }
+	if (isDark) {
+		body.classList.add("dark-mode");
+		themeIcon.textContent = darkIcon; // Ganti ikon jadi bulan
+		localStorage.setItem("theme", "dark");
+	} else {
+		body.classList.remove("dark-mode");
+		themeIcon.textContent = lightIcon; // Ganti ikon jadi matahari
+		localStorage.setItem("theme", "light");
+	}
 }
 
 // 2. FUNGSI UNTUK MENGGANTI TEMA SAAT TOMBOL DIKLIK
-toggleButton.addEventListener('click', () => {
-    // Cek apakah saat ini sudah dalam mode gelap
-    const isCurrentlyDark = body.classList.contains('dark-mode');
-    
-    // Panggil fungsi applyTheme dengan status kebalikannya
-    applyTheme(!isCurrentlyDark);
+toggleButton.addEventListener("click", () => {
+	// Cek apakah saat ini sudah dalam mode gelap
+	const isCurrentlyDark = body.classList.contains("dark-mode");
+
+	// Panggil fungsi applyTheme dengan status kebalikannya
+	applyTheme(!isCurrentlyDark);
 });
 
 // 3. CEK TEMA SAAT HALAMAN PERTAMA KALI DIMUAT (untuk semua page!)
 // Fungsi ini harus ada di Main Page DAN Sub Page kamu!
-document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    
-    // Terapkan mode sesuai yang tersimpan di memori (Local Storage)
-    if (savedTheme === 'dark') {
-        applyTheme(true);
-    } else {
-        // Kalau belum pernah di-set atau diset 'light'
-        applyTheme(false);
-    }
-});
+document.addEventListener("DOMContentLoaded", () => {
+	const savedTheme = localStorage.getItem("theme");
 
+	// Terapkan mode sesuai yang tersimpan di memori (Local Storage)
+	if (savedTheme === "dark") {
+		applyTheme(true);
+	} else {
+		// Kalau belum pernah di-set atau diset 'light'
+		applyTheme(false);
+	}
+});

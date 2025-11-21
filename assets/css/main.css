@@ -265,6 +265,17 @@ a:hover {
 	color: var(--primary-color);
 }
 
+.desktop-district-nav {
+    background-color: var(--primary-color);
+    padding: 10px 40px;
+    /* ... gaya lainnya ... */
+}
+
+/* Sembunyikan Navigasi Mobile di Tampilan Desktop */
+.header-right .mobile-district-nav {
+    display: none; /* Sembunyikan nav distrik di dalam hamburger menu saat di desktop */
+}
+
 /* Dropdown untuk nav bawah */
 .dropdown-item {
 	position: relative;
@@ -417,7 +428,6 @@ g.hovered path {
 	color: var(--primary-color);
 }
 
-
 /* ==================================== */
 /* 4. GAYA UNTUK AREA KONTEN (Informatif) */
 /* ==================================== */
@@ -512,12 +522,12 @@ img {
 
 .copyright {
 	/* Ukuran besar agar jelas */
-	font-size: 1.25em; 
+	font-size: 1.25em;
 	/* Tebal agar menonjol */
-	font-weight: 700; 
+	font-weight: 700;
 	margin: 0;
 	line-height: 1.5;
-	
+
 	/* Memastikan teks berwarna putih murni */
 	color: var(--bg-white);
 }
@@ -533,6 +543,7 @@ img {
 /* ==================================== */
 
 /* Container utama dropdown (Kabupaten/Kota) */
+
 .district-nav .dropdown-item {
 	position: relative;
 	display: inline-block;
@@ -643,7 +654,9 @@ img {
 	z-index: 9999;
 
 	/* Gaya Visual */
-	background-color: var(--accent-color); /* Latar belakang: Biru Gelap (#0056b3) */
+	background-color: var(
+		--accent-color
+	); /* Latar belakang: Biru Gelap (#0056b3) */
 	color: var(--bg-white); /* 💥 Panah/Teks: Putih (#ffffff) */
 	border: none;
 	border-radius: 50%;
@@ -669,6 +682,231 @@ img {
 	visibility: visible;
 }
 
+/* ==================================== */
+/* 2. RESPONSIVENESS & MOBILE MENU (HAMBURGER) */
+/* ==================================== */
+
+/* Sembunyikan tombol toggle secara default (hanya muncul di mobile) */
+.menu-toggle {
+	display: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+	z-index: 1001; /* Di atas elemen lain */
+	position: relative;
+	/* Sesuaikan warna hamburger menu dengan tema */
+	color: var(--text-dark);
+}
+
+.menu-toggle .bar {
+	display: block;
+	width: 25px;
+	height: 3px;
+	margin: 5px auto;
+	background-color: var(--text-dark); /* Warna bar */
+	transition: all 0.3s ease-in-out;
+}
+
+/* ------------------------------------------------ */
+/* MEDIA QUERY: LAYAR KECIL (HP) - Lebar Maksimum 768px */
+/* ------------------------------------------------ */
+@media (max-width: 768px) {
+	/* HEADER MOBILE */
+	.header {
+		/* Memastikan logo di kiri dan hamburger di kanan */
+		justify-content: space-between;
+		padding: 10px 20px;
+		position: relative;
+	}
+
+	/* Tampilkan hamburger menu */
+	.menu-toggle {
+		display: block;
+	}
+
+	/* Sembunyikan navigasi desktop secara default */
+	.header-right {
+		display: none; /* Sembunyikan default */
+		flex-direction: column;
+		position: absolute;
+		top: 100%; /* Di bawah header */
+		right: 0;
+		width: 100%;
+		max-width: 250px; /* Lebar menu untuk HP */
+		background-color: var(--bg-white);
+		box-shadow: var(--shadow-soft);
+		padding: 10px 0;
+		border-radius: 0 0 5px 5px;
+		z-index: 1000;
+		align-items: flex-start; /* Rata kiri */
+	}
+
+	/* Tampilkan navigasi saat kelas 'open' ditambahkan oleh JS */
+	.header-right.open {
+		display: flex;
+	}
+
+	.header-right .nav-link,
+	.header-right a {
+		padding: 12px 20px;
+		width: 100%;
+		border-bottom: 1px solid var(--border-soft);
+	}
+
+	/* Animasi silang (cross) untuk hamburger saat menu terbuka */
+	.menu-toggle.open .bar:nth-child(1) {
+		transform: translateY(8px) rotate(45deg);
+	}
+
+	.menu-toggle.open .bar:nth-child(2) {
+		opacity: 0;
+	}
+
+	.menu-toggle.open .bar:nth-child(3) {
+		transform: translateY(-8px) rotate(-45deg);
+	}
+
+	/* NAVIGASI DISTRIK MOBILE (PERKECIL) */
+	.district-nav {
+		padding: 5px 0;
+		margin-bottom: 15px;
+		overflow-x: auto; /* Mengaktifkan scroll horizontal */
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+		top: 70px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	/* Sembunyikan scrollbar di beberapa browser (opsional) */
+	.district-nav::-webkit-scrollbar {
+		display: none;
+	}
+	.district-nav {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.district-nav ul {
+		justify-content: flex-start;
+		padding: 0 10px;
+		gap: 10px; /* Jarak antar item diperkecil lagi */
+	}
+
+	.district-nav li {
+		/* Perkecil Font secara signifikan */
+		font-size: 0.75em; /* DARI 0.8em MENJADI 0.75em */
+		flex-shrink: 0;
+	}
+
+	.district-nav a {
+		padding: 5px 7px; /* Padding diperkecil lagi */
+
+		/* Hapus animasi underline untuk mobile agar lebih ringkas */
+		&::before,
+		&::after {
+			display: none;
+		}
+	}
+
+	/* Pastikan dropdown Kota/Kabupaten tetap terlihat saat di-scroll */
+	.district-nav .dropdown-item {
+		position: relative;
+	}
+
+	.district-nav .dropdown-content {
+		min-width: 120px; /* Perkecil lebar minimum dropdown */
+		font-size: 1em; /* Ukuran font di dalam dropdown tetap nyaman */
+		left: 0;
+		right: auto;
+	}
+	.desktop-district-nav {
+        display: block; /* Tetap ditampilkan di luar menu */
+        padding: 5px 0; 
+        margin-bottom: 15px;
+        overflow-x: auto; 
+        white-space: nowrap; 
+        top: 70px; 
+    }
+    
+    .desktop-district-nav ul {
+        justify-content: flex-start; 
+        padding: 0 10px;
+        gap: 10px; 
+    }
+
+    .desktop-district-nav li {
+        font-size: 0.75em; 
+        flex-shrink: 0; 
+    }
+    
+    /* Sembunyikan Navigasi Desktop di dalam Hamburger Menu agar tidak bertabrakan */
+    .header-right .nav-link::after,
+    .desktop-district-nav a::before,
+    .desktop-district-nav a::after {
+        display: none;
+    }
 
 
+    /* === GAYA NAVIGASI DISTRIK DI DALAM HAMBURGER MENU (Mobile Vertikal) === */
+    .header-right .mobile-district-nav {
+        display: block; /* Tampilkan di dalam hamburger menu */
+        background-color: transparent;
+        padding: 10px 0;
+        margin-top: 10px;
+        box-shadow: none;
+    }
+    
+    .mobile-district-nav ul {
+        flex-direction: column; /* Ubah tata letak menjadi vertikal */
+        align-items: flex-start;
+        gap: 0;
+        padding: 0;
+    }
+    
+    .mobile-district-nav li {
+        width: 100%;
+        font-size: 1em; /* Ukuran font lebih besar agar mudah disentuh */
+        padding: 0;
+        border-bottom: 1px solid var(--border-soft);
+    }
+    
+    .mobile-district-nav a {
+        padding: 10px 20px; /* Padding yang nyaman */
+        color: var(--text-dark);
+        background-color: transparent;
+    }
+    
+    .mobile-district-nav .dropdown-item {
+        width: 100%;
+    }
+    
+    /* Gaya Dropdown di dalam Menu Vertikal */
+    .mobile-district-nav .dropdown-content {
+        position: static; /* Biarkan konten muncul di bawah link */
+        display: block; 
+        visibility: hidden; /* Sembunyikan default (perlu JS untuk toggle) */
+        opacity: 0; 
+        height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        box-shadow: none;
+        background-color: var(--bg-light); /* Warna background sedikit berbeda */
+    }
+}
 
+/* ------------------------------------------------ */
+/* MEDIA QUERY: LAYAR LEBAR (Monitor 16" ke atas, TV) - Lebar Minimum 1200px */
+/* ------------------------------------------------ */
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1400px; /* Batas lebar konten di layar sangat lebar */
+	}
+	.main-content {
+		gap: 30px; /* Jarak antar kolom lebih lega */
+	}
+	.map-area svg {
+		width: 1000px; /* Ukuran peta bisa lebih besar */
+		height: auto;
+	}
+}
