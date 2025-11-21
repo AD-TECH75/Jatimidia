@@ -2,16 +2,16 @@
 /* 0. VARIABEL DASAR & RESET (Minimalis & Fixed Layout) */
 /* ==================================== */
 
-/* Palet Warna Jawa Timur - Minimalis */
+/* Palet Warna Jawa Timur - Menggunakan Skema Biru/Abu-abu dari tamplate.css */
 :root {
-	--primary-color: #00563f; /* Hijau Tua (Aksen Utama) */
-	--accent-color: #ffc300; /* Kuning Emas (Highlight & Interaktif) */
-	--secondary-color: #00805c; /* Hijau Menengah (Peta Fill/Latar Sekunder) */
-	--bg-light: #f0f0f0; /* 💥 PERUBAHAN: Background Area Bersih (Lebih jelas bedanya) */
+	--primary-color: #007bff; /* 💥 PERUBAHAN: Biru (Aksen Utama, dari a/h2 di template) */
+	--accent-color: #0056b3; /* 💥 PERUBAHAN: Biru Gelap (Highlight & Interaktif, dari a:hover di template) */
+	--secondary-color: #004c99; /* 💥 PERUBAHAN: Biru Kuat (Peta Fill/Latar Sekunder, dari aside h2 di template) */
+	--bg-light: #f0f2f5; /* 💥 PERUBAHAN: Background Area Bersih (Lebih terang, dari body di template) */
 	--bg-white: #ffffff; /* Background Kartu/Header (Putih Murni) */
-	--text-dark: #212529; /* Teks Gelap Standar */
-	--text-muted: #6c757d; /* Teks Muted/Keterangan */
-	--border-soft: #dee2e6; /* Garis batas halus */
+	--text-dark: #333; /* 💥 PERUBAHAN: Teks Gelap Standar (Dari body color di template) */
+	--text-muted: #6c757d; /* Teks Muted/Keterangan (Tetap sama) */
+	--border-soft: #dee2e6; /* Garis batas halus (Tetap sama) */
 	--shadow-soft: 0 1px 6px rgba(0, 0, 0, 0.08); /* Bayangan sangat tipis */
 	--background-image: url("https://cdn.antaranews.com/cache/1200x800/2025/11/18/1000839720.jpg");
 }
@@ -26,8 +26,8 @@
 body {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	line-height: 1.6;
-	background-color: var(--bg-light); /* Menggunakan warna baru */
-	color: var(--text-dark);
+	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
+	color: var(--text-dark); /* Menggunakan warna baru (#333) */
 	scroll-behavior: smooth;
 
 	/* FIX: Padding yang cukup tinggi untuk header fixed */
@@ -307,7 +307,7 @@ a:hover {
 .map-title-section {
 	margin: 0;
 	padding: 30px 0 15px;
-	background-color: var(--bg-light); /* Menggunakan warna baru */
+	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
 	text-align: center;
 	width: 100%;
 }
@@ -324,7 +324,7 @@ a:hover {
 .map-area {
 	position: relative;
 	padding: 40px;
-	background-color: var(--bg-light); /* Menggunakan warna baru */
+	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -352,7 +352,9 @@ a:hover {
 #map-container path,
 #map-container g {
 	fill: var(--secondary-color);
-	stroke: var(--bg-light); /* Border menggunakan warna background baru */
+	stroke: var(
+		--bg-light
+	); /* Border menggunakan warna background baru (#f0f2f5) */
 	stroke-width: 1px;
 	transition: fill 0.3s ease;
 }
@@ -419,7 +421,7 @@ g.hovered path {
 	grid-template-columns: 1fr;
 	gap: 30px;
 	max-width: 1100px;
-	background-color: var(--bg-light); /* Menggunakan warna baru */
+	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
 }
 
 section,
@@ -428,7 +430,7 @@ article {
 	padding: 30px;
 	border-radius: 8px;
 	box-shadow: var(--shadow-soft);
-	/* Garis aksen informatif: Hijau Tua */
+	/* Garis aksen informatif: Menggunakan warna utama yang baru */
 	border-left: 5px solid var(--primary-color);
 }
 
@@ -492,28 +494,29 @@ img {
 /* ==================================== */
 
 .footer {
-	padding: 25px 40px;
+	/* Menggunakan warna biru baru (--primary-color: #007bff) */
 	background-color: var(--primary-color);
-	color: var(--bg-white);
+	padding: 25px 40px;
+	color: var(--bg-white); /* Warna teks default putih murni */
 	text-align: center;
 	font-size: 0.9em;
 }
 
-.footer a {
-	color: var(--accent-color);
-	font-weight: 600;
+.copyright {
+	/* Ukuran besar agar jelas */
+	font-size: 1.25em; 
+	/* Tebal agar menonjol */
+	font-weight: 700; 
+	margin: 0;
+	line-height: 1.5;
+	
+	/* Memastikan teks berwarna putih murni */
+	color: var(--bg-white);
 }
 
 @media (min-width: 768px) {
-	/* Header di Desktop */
-	.header {
-		padding: 10px 60px;
-	}
-
-	/* Mengubah .info-content menjadi 2 kolom di layar desktop */
-	.info-content {
-		grid-template-columns: repeat(2, 1fr);
-		padding: 60px 60px;
+	.footer {
+		padding: 30px 60px;
 	}
 }
 
@@ -632,8 +635,8 @@ img {
 	z-index: 9999;
 
 	/* Gaya Visual */
-	background-color: var(--accent-color); /* Warna aksen (oranye) */
-	color: var(--primary-color); /* Warna teks (hijau tua) */
+	background-color: var(--accent-color); /* Latar belakang: Biru Gelap (#0056b3) */
+	color: var(--bg-white); /* 💥 Panah/Teks: Putih (#ffffff) */
 	border: none;
 	border-radius: 50%;
 	width: 45px;
@@ -649,7 +652,7 @@ img {
 }
 
 #scrollToTopBtn:hover {
-	background-color: #f7a627; /* Sedikit lebih gelap saat hover */
+	background-color: #004c99; /* Biru lebih gelap saat hover */
 }
 
 /* Class yang ditambahkan oleh JS untuk menampilkan tombol */
@@ -657,3 +660,5 @@ img {
 	opacity: 1;
 	visibility: visible;
 }
+
+
