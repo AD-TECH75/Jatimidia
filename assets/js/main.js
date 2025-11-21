@@ -1,3 +1,18 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+});
+
+
+
+
+
+
+
+
+
 // ====================================================================
 // FUNGSI UTAMA SMOOTH SCROLL KUSTOM (SINE EASING)
 // Digunakan untuk navigasi menu dan tombol 'Scroll to Top'
@@ -266,3 +281,47 @@ function setupNavLikeSVG() {
 }
 
 setupNavLikeSVG();
+
+
+const toggleButton = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const body = document.body;
+const darkIcon = '🌙'; // Ikon bulan
+const lightIcon = '☀️'; // Ikon matahari
+
+// 1. FUNGSI INTI: Menerapkan tema dan menyimpan ke Local Storage
+function applyTheme(isDark) {
+    if (isDark) {
+        body.classList.add('dark-mode');
+        themeIcon.textContent = darkIcon; // Ganti ikon jadi bulan
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.classList.remove('dark-mode');
+        themeIcon.textContent = lightIcon; // Ganti ikon jadi matahari
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// 2. FUNGSI UNTUK MENGGANTI TEMA SAAT TOMBOL DIKLIK
+toggleButton.addEventListener('click', () => {
+    // Cek apakah saat ini sudah dalam mode gelap
+    const isCurrentlyDark = body.classList.contains('dark-mode');
+    
+    // Panggil fungsi applyTheme dengan status kebalikannya
+    applyTheme(!isCurrentlyDark);
+});
+
+// 3. CEK TEMA SAAT HALAMAN PERTAMA KALI DIMUAT (untuk semua page!)
+// Fungsi ini harus ada di Main Page DAN Sub Page kamu!
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Terapkan mode sesuai yang tersimpan di memori (Local Storage)
+    if (savedTheme === 'dark') {
+        applyTheme(true);
+    } else {
+        // Kalau belum pernah di-set atau diset 'light'
+        applyTheme(false);
+    }
+});
+

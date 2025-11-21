@@ -11,6 +11,7 @@
 /* FIX: Padding yang cukup tinggi untuk body agar konten tidak tertutup header fixed */
 body {
 	padding-top: 70px;
+	background-color: rgb(227, 248, 255);
 }
 
 /* ==================================== */
@@ -28,7 +29,7 @@ body {
 	width: 100%;
 	z-index: 1030; /* Penting agar selalu di atas konten lain */
 	min-height: 60px;
-	background-color: var(--bg-white);
+	background-color: lightblue;
 	color: var(--text-dark);
 	border-bottom: 1px solid var(--border-soft);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);

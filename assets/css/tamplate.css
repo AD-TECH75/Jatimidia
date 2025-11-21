@@ -8,6 +8,10 @@ body {
     color: #333;
     box-sizing: border-box; /* Penting untuk layout yang rapi */
 }
+.dark-mode {
+  background-color: #333; /* Warna gelap */
+  color: white; /* Warna terang untuk teks */
+}
 
 /* Biar gambar responsif */
 img {
@@ -22,6 +26,7 @@ a {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s;
+    scroll-behavior: smooth;
 }
 
 a:hover {
@@ -69,7 +74,7 @@ body {
 	width: 100%;
 	z-index: 1030; /* Penting agar selalu di atas konten lain */
 	min-height: 60px;
-	background-color: var(--bg-white);
+	background-color: rgb(113, 219, 255);
 	color: var(--text-dark);
 	border-bottom: 1px solid var(--border-soft);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -135,7 +140,7 @@ article {
     /* Hapus margin-right: auto; karena kita mau dia full kiri */
     
     /* Article sekarang lebar 68% (untuk memberi ruang 2% di antara article dan aside) */
-    width: 63%; 
+    width: 60%; 
     
     /* Ini KUNCI-nya! Kasih margin di kanan sebesar lebar aside + gap */
     /* Lebar aside (30%) + jarak (2%) = 32% */
@@ -159,6 +164,73 @@ aside {
     border-radius: 8px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
 }
+
+
+
+
+
+
+
+
+
+/* --- FIX LAYOUT UNTUK LAYAR KECIL (Maksimal 767px) --- */
+/* Ini adalah breakpoint di mana layout 2 kolommu harus menumpuk */
+
+@media screen and (max-width: 900px) {
+    
+    /* 1. Reset .main-content */
+    .main-content {
+        /* Di layar kecil, Grid/Block yang asli (yang kamu set 3fr 1fr) 
+           kita tumpuk lagi dengan set display menjadi block biasa */
+        display: block;
+        padding: 15px 10px; /* Kurangi padding biar nggak terlalu makan tempat */
+    }
+
+    /* 2. Reset Article (Konten Utama) */
+    article {
+        /* Ini KUNCI-nya! Kita reset lebar dan margin yang dipakai untuk float */
+        width: 100%; /* Wajib 100% agar full lebar */
+        margin-right: 0; /* Hapus margin yang dipakai buat kompensasi aside */
+        
+        padding: 20px; /* Sedikit kurangi padding */
+        
+        /* Tambahkan jarak bawah biar aside nggak nempel banget di HP */
+        margin-bottom: 20px; 
+    }
+
+    /* 3. Reset Aside (Sidebar) */
+    aside {
+        /* Ini KUNCI-nya! Kita reset float */
+        width: 100%; /* Wajib 100% agar full lebar */
+        float: none; /* Hapus float: right; agar dia pindah ke bawah article */
+    }
+}
+
+
+
+@media screen and (min-width: 900px){
+    article section{
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* --- 5. STYLING ELEMEN KONTEN --- */
 h2 {
     color: #007bff;
@@ -239,14 +311,6 @@ aside h3 {
 }
 
 
-/* --- 6. FOOTER --- */
-footer {
-    background-color: #343a40;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 0.9em;
-}
 
 
 /* --- 7. RESPONSIVENESS (Jurus Utama buat HP) --- */
@@ -432,4 +496,35 @@ aside h2 {
         flex-basis: auto; /* Card akan mengambil lebar penuh */
         padding: 15px;
     }
+}
+
+#scrollToTopBtn {
+	/* Posisi selalu tetap di layar */
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 9999;
+
+	/* Gaya Visual */
+	background-color: rgb(30, 80, 188); /* Latar belakang: Biru Gelap (#0056b3) */
+	color: var(--bg-white); /* 💥 Panah/Teks: Putih (#ffffff) */
+	border: none;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	font-size: 1.5em;
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
+	/* Animasi Tampil/Sembunyi */
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* --- 6. FOOTER --- */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
 }
