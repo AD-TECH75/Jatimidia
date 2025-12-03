@@ -150,3 +150,44 @@ document.addEventListener("DOMContentLoaded", () => {
     setupNavRedirect();
     setupScrollToTop();
 });
+
+/* ==========================================================
+   TAB SEJARAH
+   ========================================================== */
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil elemen slider dan display teks
+        const slider = document.getElementById('abadSlider');
+        const abadDisplay = document.getElementById('abadDisplay');
+        const tabContent = document.getElementById('sejarahTabContent');
+
+        // Fungsi untuk mengaktifkan konten tab yang sesuai
+        function activateAbad(abadNumber) {
+            // ID target konten: contoh 'konten-sejarah5'
+            const targetId = `konten-sejarah${abadNumber}`;
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                // 1. Update teks display
+                abadDisplay.textContent = abadNumber;
+                
+                // 2. Nonaktifkan semua konten (hilangkan .show dan .active)
+                const allTabs = tabContent.querySelectorAll('.tab-pane');
+                allTabs.forEach(tab => {
+                    tab.classList.remove('show', 'active');
+                });
+
+                // 3. Aktifkan konten yang sesuai dengan nilai slider (tambahkan .show dan .active)
+                targetElement.classList.add('show', 'active');
+            }
+        }
+
+        // Event listener saat slider digeser
+        slider.addEventListener('input', function() {
+            // Ambil nilai slider saat ini
+            const currentAbad = this.value; 
+            activateAbad(currentAbad);
+        });
+
+        // Panggil saat halaman pertama kali dimuat (untuk memastikan Abad 1 aktif)
+        activateAbad(slider.value);
+    });
