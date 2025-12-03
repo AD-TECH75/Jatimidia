@@ -251,7 +251,7 @@ p {
 }
 
 .tab-content img {
-	max-width: 100%;
+	max-width: 35px;
 	border-radius: 6px;
 	margin: 1rem auto;
 	display: block;
