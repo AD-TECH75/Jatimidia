@@ -362,4 +362,8 @@ p {
     box-shadow: none !important;
 }
 
-
+.navbar-brand img {
+    height: 35px !important;
+    width: auto !important;
+    object-fit: contain;
+}
