@@ -40,15 +40,13 @@ a:hover {
 	color: var(--accent-color);
 }
 
-.card-header{
-    width: 70%;
-    margin: 10px auto; /* membuat card ke tengah */
+.card-header {
+	width: 70%;
+	margin: 10px auto; /* membuat card ke tengah */
 	.card {
-    background-color: transparent;
+		background-color: transparent;
+	}
 }
-
-}
-
 
 /* ==================================== */
 /* 2. HERO */
@@ -112,7 +110,6 @@ a:hover {
 		opacity: 1;
 	}
 }
-
 
 /* ==================================== */
 /* 4. MAP AREA */
@@ -209,23 +206,21 @@ path.hovered {
 /* ==================================== */
 
 .info-content {
-    padding: 20px 40px !important;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    max-width: 1100px;
-    background-color: var(--bg-light);  /* ⬅️ INI WARNA PUTIH/ABU */
+	padding: 20px 40px !important;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 30px;
+	max-width: 1100px;
+	background-color: var(--bg-light); /* ⬅️ INI WARNA PUTIH/ABU */
 }
-
 
 section,
 article {
-    background-color: transparent !important;
-    box-shadow: none !important; /* kalau ingin hilang bayangannya juga */
-    border-left: none !important;
+	background-color: transparent !important;
+	box-shadow: none !important; /* kalau ingin hilang bayangannya juga */
+	border-left: none !important;
 }
-
 
 section h3,
 article h3 {
@@ -251,12 +246,11 @@ p {
 }
 
 .tab-content img {
-	max-width: 35px;
+	max-width: 100%;
 	border-radius: 6px;
 	margin: 1rem auto;
 	display: block;
 }
-
 
 /* ==================================== */
 /* 7. SCROLL TO TOP */
@@ -357,13 +351,19 @@ p {
 .card-header,
 .card-body,
 .card-footer {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+	background-color: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
 }
 
 .navbar-brand img {
-    height: 35px !important;
-    width: auto !important;
-    object-fit: contain;
+	height: 35px !important;
+	width: auto !important;
+	object-fit: contain;
+}
+
+@media (max-width: 768px) {
+	.navbar-brand img {
+		height: 30px !important;
+	}
 }
