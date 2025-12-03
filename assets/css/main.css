@@ -1,18 +1,17 @@
 /* ==================================== */
-/* 0. VARIABEL DASAR & RESET (Minimalis & Fixed Layout) */
+/* 0. VARIABEL DASAR & RESET */
 /* ==================================== */
 
-/* Palet Warna Jawa Timur - Menggunakan Skema Biru/Abu-abu dari tamplate.css */
 :root {
-	--primary-color: #007bff; /* 💥 PERUBAHAN: Biru (Aksen Utama, dari a/h2 di template) */
-	--accent-color: #0056b3; /* 💥 PERUBAHAN: Biru Gelap (Highlight & Interaktif, dari a:hover di template) */
-	--secondary-color: #034588; /* 💥 PERUBAHAN: Biru Kuat (Peta Fill/Latar Sekunder, dari aside h2 di template) */
-	--bg-light: #f0f2f5; /* 💥 PERUBAHAN: Background Area Bersih (Lebih terang, dari body di template) */
-	--bg-white: #ffffff; /* Background Kartu/Header (Putih Murni) */
-	--text-dark: #333; /* 💥 PERUBAHAN: Teks Gelap Standar (Dari body color di template) */
-	--text-muted: #6c757d; /* Teks Muted/Keterangan (Tetap sama) */
-	--border-soft: #dee2e6; /* Garis batas halus (Tetap sama) */
-	--shadow-soft: 0 1px 6px rgba(0, 0, 0, 0.08); /* Bayangan sangat tipis */
+	--primary-color: #007bff;
+	--accent-color: #0056b3;
+	--secondary-color: #034588;
+	--bg-light: #f0f2f5;
+	--bg-white: #ffffff;
+	--text-dark: #333;
+	--text-muted: #6c757d;
+	--border-soft: #dee2e6;
+	--shadow-soft: 0 1px 6px rgba(0, 0, 0, 0.08);
 	--background-image: url("https://cdn.antaranews.com/cache/1200x800/2025/11/18/1000839720.jpg");
 }
 
@@ -26,11 +25,8 @@
 body {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	line-height: 1.6;
-	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
-	color: var(--text-dark); /* Menggunakan warna baru (#333) */
-	scroll-behavior: smooth;
-
-	/* FIX: Padding yang cukup tinggi untuk header fixed */
+	background-color: var(--text-dark);
+	color: var(--text-dark);
 	padding-top: 70px;
 }
 
@@ -44,141 +40,39 @@ a:hover {
 	color: var(--accent-color);
 }
 
-.container {
-	width: 100%;
-	margin: 0 auto;
-	background-color: var(--bg-white); /* Kontainer utama tetap putih */
+.card-header{
+    width: 70%;
+    margin: 10px auto; /* membuat card ke tengah */
+	.card {
+    background-color: transparent;
 }
+
+}
+
 
 /* ==================================== */
-/* 1. HEADER & NAVIGASI ATAS (FIXED & MINIMALIS) */
-/* ==================================== */
-
-.header {
-	display: flex; /* Untuk mensejajarkan kiri dan kanan */
-	justify-content: space-between; /* Memisahkan header-left dan header-right */
-	align-items: center;
-	padding: 10px 30px;
-	position: fixed; /* KRITIS: Membuat header menempel di atas */
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 1030; /* Penting agar selalu di atas konten lain */
-	min-height: 60px;
-	background-color: var(--bg-white);
-	color: var(--text-dark);
-	border-bottom: 1px solid var(--border-soft);
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Penataan Konten Kiri (Logo & Judul) */
-.header-left {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
-
-.header-left .logo {
-	font-size: 1.1em;
-	font-weight: 700;
-	color: var(--primary-color);
-	width: 35px;
-	height: 35px;
-	object-fit: contain;
-}
-
-.region-title {
-	font-size: 1.1em;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	color: var(--text-dark);
-	margin: 0;
-}
-
-/* Penataan Konten Kanan (Navigasi & Tema) */
-.header-right {
-	display: flex;
-	align-items: center;
-	gap: 20px;
-}
-
-.nav-link,
-.dropdown-link {
-	color: var(--text-dark);
-	font-weight: 500;
-	padding: 5px 10px;
-	border-radius: 4px;
-	transition: all 0.2s;
-	font-size: 0.9em;
-}
-
-.nav-link:hover,
-.dropdown-link:hover {
-	color: var(--primary-color);
-	background-color: var(--bg-light);
-}
-
-.theme-toggle {
-	font-size: 1.4em;
-	cursor: pointer;
-	color: var(--accent-color);
-}
-
-/* --- DROPDOWN/POPUP Styles Minimalis --- */
-
-.dropdown-content {
-	background-color: var(--bg-white);
-	box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-	border: 1px solid var(--border-soft);
-}
-
-.dropdown-content a {
-	color: var(--text-dark);
-}
-
-.dropdown-content a:hover {
-	background-color: var(--bg-light);
-	color: var(--primary-color);
-}
-
-/* ==================================== */
-/* 2. HERO & NAVIGASI BAWAH */
+/* 2. HERO */
 /* ==================================== */
 
 .hero-image-section {
 	position: relative;
 	width: 100%;
 	height: 300px;
-
-	/* PENTING: Menggunakan variabel yang Anda minta */
 	background-image: var(--background-image);
-
 	background-size: cover;
 	background-position: center;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
-
-	/* Animasi Gerak Tipis pada Gambar Latar Belakang */
 	animation: heroBreathe 20s ease-in-out infinite alternate forwards;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .hero-overlay {
 	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(
-		0,
-		0,
-		0,
-		0.35
-	); /* Sedikit lebih gelap agar teks putih kontras */
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.35);
 	z-index: 1;
 }
 
-/* Konten Teks di Tengah Hero */
 .hero-content {
 	position: absolute;
 	top: 50%;
@@ -186,7 +80,7 @@ a:hover {
 	transform: translate(-50%, -50%);
 	z-index: 2;
 	text-align: center;
-	color: var(--bg-white);
+	color: white;
 }
 
 .hero-title {
@@ -196,135 +90,41 @@ a:hover {
 	letter-spacing: 5px;
 	margin: 0;
 	text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-
-	/* Animasi Gerak Tipis pada Teks */
 	animation: textFloat 4s ease-in-out infinite alternate;
 }
 
-/* --- Keyframes Animasi --- */
-
-/* Animasi Bernapas/Gerak Tipis pada Gambar */
 @keyframes heroBreathe {
 	0% {
 		background-size: 100% auto;
-		background-position: 50% 50%; /* Tengah */
 	}
 	100% {
-		background-size: 105% auto; /* Zoom in tipis 5% */
-		background-position: 50% 45%; /* Geser sedikit ke atas */
+		background-size: 105% auto;
 	}
 }
 
-/* Animasi Gerak Tipis pada Teks */
 @keyframes textFloat {
 	0% {
-		transform: translateY(0) scale(1);
+		transform: translateY(0);
 		opacity: 0.95;
 	}
 	100% {
-		transform: translateY(-5px) scale(1.01);
+		transform: translateY(-5px);
 		opacity: 1;
 	}
 }
 
-/* --- NAVIGASI BAWAH (Tetap) --- */
-.district-nav {
-	background-color: var(--primary-color);
-	padding: 10px 0;
-	margin: 0;
-	width: 100%;
-	/* KRITIS: Hapus overflow-x: auto; untuk mencegah clipping vertikal pada dropdown */
-	white-space: nowrap;
-	border-bottom: 3px solid var(--accent-color);
-}
-
-.district-nav ul {
-	list-style: none;
-	padding: 0 30px;
-	margin: 0;
-	display: flex;
-	gap: 25px;
-	justify-content: center;
-	/* PENTING: Jika ada masalah, tambahkan ini: */
-	position: relative;
-	z-index: 2000;
-}
-
-.district-nav ul li a {
-	color: var(--bg-white);
-	padding: 8px 15px;
-	font-size: 0.9em;
-	border-radius: 4px;
-	text-transform: uppercase;
-	font-weight: 600;
-}
-
-.district-nav ul li a:hover,
-.district-nav ul li a.active {
-	background-color: var(--accent-color);
-	color: var(--primary-color);
-}
-
-.desktop-district-nav {
-    background-color: var(--primary-color);
-    padding: 10px 40px;
-    /* ... gaya lainnya ... */
-}
-
-/* Sembunyikan Navigasi Mobile di Tampilan Desktop */
-.header-right .mobile-district-nav {
-    display: none; /* Sembunyikan nav distrik di dalam hamburger menu saat di desktop */
-}
-
-/* Dropdown untuk nav bawah */
-.dropdown-item {
-	position: relative;
-}
-
-.dropdown-menu {
-	display: none;
-	position: absolute;
-	background: var(--bg-white);
-	padding: 10px 0;
-	margin-top: 8px;
-	list-style: none;
-	min-width: 160px;
-	border-radius: 6px;
-	box-shadow: var(--shadow-soft);
-	border: 1px solid var(--border-soft);
-	z-index: 999;
-}
-
-.dropdown-item.active .dropdown-menu {
-	display: block;
-}
-
-.dropdown-menu li a {
-	display: block;
-	padding: 8px 15px;
-	color: var(--text-dark);
-	font-size: 0.85em;
-}
-
-.dropdown-menu li a:hover {
-	background: var(--bg-light);
-	color: var(--primary-color);
-}
 
 /* ==================================== */
-/* 3. MAP AREA & TOOLTIP (Minimalis Fixed) */
+/* 4. MAP AREA */
 /* ==================================== */
 
 .map-title-section {
-	margin: 0;
 	padding: 30px 0 15px;
-	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
+	background-color: var(--bg-light);
 	text-align: center;
-	width: 100%;
 }
 
 .map-title {
-	margin: 0;
 	font-size: 1.8em;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -334,19 +134,19 @@ a:hover {
 
 .map-area {
 	position: relative;
-	padding: 40px;
-	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
+	padding: 20px;
+	background-color: var(--bg-light);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 550px;
+	min-height: 350px !important; /* FIX */
 }
 
 .map-container-box {
 	max-width: 900px;
 	width: 95%;
-	height: auto;
-	background-color: var(--bg-white); /* Tetap Putih */
+	height: auto !important; /* FIX */
+	background-color: white;
 	border-radius: 8px;
 	box-shadow: var(--shadow-soft);
 	overflow: hidden;
@@ -355,56 +155,41 @@ a:hover {
 
 #map-container svg {
 	width: 100%;
-	height: 100%;
+	height: auto !important;
 	display: block;
 }
 
-/* Gaya Peta - Kontras Jelas */
-#map-container path,
-#map-container g {
+#map-container path {
 	fill: var(--secondary-color);
-	stroke: var(
-		--bg-light
-	); /* Border menggunakan warna background baru (#f0f2f5) */
+	stroke: var(--bg-light);
 	stroke-width: 1px;
-	transition: fill 0.3s ease;
+	transition: 0.3s;
 }
 
-/* Gaya Hover/Highlight */
-path.hovered,
-g.hovered path {
+path.hovered {
 	fill: var(--accent-color) !important;
 	stroke: var(--primary-color);
 	stroke-width: 2px;
 	cursor: pointer;
 }
 
-/* --- Tooltip Styles (Minimalis Clean) --- */
+/* Tooltip */
 
 #tooltip {
 	position: absolute;
 	width: 240px;
-	background-color: var(--bg-white);
+	background-color: white;
 	color: var(--text-dark);
-	padding: 0;
-	border-radius: 6px;
-	font-size: 0.9em;
-	pointer-events: none;
-	opacity: 0;
-	transition: opacity 0.2s ease-in-out;
-	z-index: 9999;
-	display: flex;
-	flex-direction: column;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 	border: 1px solid var(--border-soft);
-
-	top: 0;
-	left: 0;
+	border-radius: 6px;
+	opacity: 0;
+	transition: 0.2s;
+	z-index: 9999;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 }
 
 #tooltip-image-container {
-	width: 100%;
 	height: 120px;
 	background-color: var(--text-muted);
 	background-size: cover;
@@ -412,501 +197,169 @@ g.hovered path {
 	border-bottom: 3px solid var(--accent-color);
 }
 
-#tooltip-image-container img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	display: block;
-}
-
 #tooltip-text-container {
-	padding: 10px 15px;
-	font-weight: 700;
+	padding: 10px;
 	text-align: center;
-	text-transform: uppercase;
-	line-height: 1.3;
 	color: var(--primary-color);
+	font-weight: 700;
 }
 
 /* ==================================== */
-/* 4. GAYA UNTUK AREA KONTEN (Informatif) */
+/* 5. CONTENT AREA */
 /* ==================================== */
 
 .info-content {
-	padding: 60px 40px;
-	margin: 0 auto;
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 30px;
-	max-width: 1100px;
-	background-color: var(--bg-light); /* Menggunakan warna baru (#f0f2f5) */
+    padding: 20px 40px !important;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    background-color: var(--bg-light);  /* ⬅️ INI WARNA PUTIH/ABU */
 }
+
 
 section,
 article {
-	background-color: var(--bg-white); /* Tetap Putih */
-	padding: 30px;
-	border-radius: 8px;
-	box-shadow: var(--shadow-soft);
-	/* Garis aksen informatif: Menggunakan warna utama yang baru */
-	border-left: 5px solid var(--primary-color);
+    background-color: transparent !important;
+    box-shadow: none !important; /* kalau ingin hilang bayangannya juga */
+    border-left: none !important;
 }
+
 
 section h3,
 article h3 {
 	font-size: 1.6rem;
-	color: var(--text-dark);
-	margin-top: 0;
 	margin-bottom: 15px;
-	font-weight: 700;
-	padding-bottom: 10px;
+	color: var(--text-dark);
 	border-bottom: 1px solid var(--border-soft);
-	letter-spacing: 0.5px;
+	padding-bottom: 10px;
 }
 
 p {
 	line-height: 1.75;
-	margin-bottom: 15px;
 	color: var(--text-muted);
-	text-align: justify;
 	font-size: 0.95rem;
+	text-align: justify;
+	margin-bottom: 15px;
 }
 
-strong {
-	color: var(--primary-color);
-	font-weight: 700;
+/* Tabs */
+
+.nav-tabs {
+	margin-top: 20px;
 }
 
-img {
+.tab-content img {
 	max-width: 100%;
-	height: auto;
-	display: block;
-	border-radius: 4px;
-	margin: 20px auto;
-	object-fit: cover;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.iframe-responsive-container {
-	position: relative;
-	width: 100%;
-	padding-bottom: 56.25%;
-	height: 0;
-	overflow: hidden;
-	margin: 20px 0;
 	border-radius: 6px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.iframe-responsive-container iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	border: 0;
-}
-
-/* ==================================== */
-/* 5. FOOTER & RESPONSIVENESS */
-/* ==================================== */
-
-.footer {
-	/* Menggunakan warna biru baru (--primary-color: #007bff) */
-	background-color: var(--primary-color);
-	padding: 25px 40px;
-	color: var(--bg-white); /* Warna teks default putih murni */
-	text-align: center;
-	font-size: 0.9em;
-}
-
-.copyright {
-	/* Ukuran besar agar jelas */
-	font-size: 1.25em;
-	/* Tebal agar menonjol */
-	font-weight: 700;
-	margin: 0;
-	line-height: 1.5;
-
-	/* Memastikan teks berwarna putih murni */
-	color: var(--bg-white);
-}
-
-@media (min-width: 768px) {
-	.footer {
-		padding: 30px 60px;
-	}
-}
-
-/* ==================================== */
-/* 6. GAYA DROPDOWN NAVIGASI BAWAH (KAB/KOTA) - FINAL SATU KOLOM */
-/* ==================================== */
-
-/* Container utama dropdown (Kabupaten/Kota) */
-
-.district-nav .dropdown-item {
-	position: relative;
-	display: inline-block;
-	cursor: pointer;
-	z-index: 2002; /* Pastikan selalu di atas elemen lain */
-}
-
-/* Tombol utama dropdown (Kabupaten/Kota) */
-.district-nav .nav-dropdown-toggle {
-	color: var(--bg-white) !important;
-	padding: 8px 15px !important;
-	font-weight: 600 !important;
-}
-
-/* Kotak konten yang muncul saat di-klik */
-.district-nav .dropdown-content {
-	/* PENTING: Display block untuk list vertikal biasa */
+	margin: 1rem auto;
 	display: block;
-	position: absolute;
-	z-index: 2001;
-
-	/* Animasi: Gunakan max-height dan opacity untuk transisi halus */
-	max-height: 0; /* KRITIS: Tinggi awal disetel nol (tertutup) */
-	opacity: 0; /* Awal disetel transparan */
-	overflow-y: auto; /* Aktifkan scroll vertikal jika konten melebihi max-height */
-	overflow-x: hidden; /* Pastikan tidak ada scroll horizontal */
-	transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
-	padding: 0 10px; /* Padding vertikal disetel nol saat tertutup */
-
-	/* Gaya Single-Kolom */
-	background-color: var(--bg-white);
-	min-width: 180px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	border-radius: 6px;
-	border-top: 3px solid var(--accent-color);
-
-	/* Penempatan */
-	top: 100%;
-	left: 50%;
-	transform: translateX(-50%);
 }
 
-/* FIX KRUSIAL: CLASS UNTUK MENAMPILKAN KONTEN */
-.district-nav .dropdown-item.active .dropdown-content {
-	max-height: 500px; /* Nilai besar agar semua konten muat */
-	opacity: 1;
-	padding: 10px; /* Padding kembali muncul saat terbuka */
-	border-bottom: 1px solid var(--border-soft);
-
-	/* Pastikan display tetap block saat aktif */
-	display: block !important;
-}
-
-/* Link di dalam dropdown */
-.district-nav .dropdown-content a {
-	/* FIX: Paksa warna gelap */
-	color: var(--text-dark) !important;
-	background-color: var(--bg-white) !important;
-
-	padding: 8px 10px; /* Padding yang lebih besar untuk link vertikal */
-	text-decoration: none;
-	display: block;
-	text-align: left;
-	font-size: 0.9em;
-	font-weight: 400;
-	transition: background-color 0.2s;
-	white-space: nowrap;
-}
-
-/* Hover link di dalam dropdown */
-.district-nav .dropdown-content a:hover {
-	background-color: var(--bg-light) !important;
-	color: var(--primary-color) !important;
-	border-radius: 4px;
-}
-
-/* ========================================= */
-/* === SCROLLBAR CLEANUP (Minimalis dan Transparan) === */
-/* ========================================= */
-
-/* Webkit (Chrome/Safari/Edge) */
-.district-nav .dropdown-content::-webkit-scrollbar {
-	width: 6px;
-	background-color: transparent;
-}
-.district-nav .dropdown-content::-webkit-scrollbar-thumb {
-	background-color: transparent;
-}
-.district-nav .dropdown-content:hover::-webkit-scrollbar-thumb {
-	background-color: rgba(0, 0, 0, 0.2);
-	border-radius: 3px;
-}
-
-/* Firefox */
-.district-nav .dropdown-content {
-	scrollbar-width: thin;
-	scrollbar-color: rgba(0, 0, 0, 0.2) var(--bg-white);
-}
 
 /* ==================================== */
-/* 7. GAYA TOMBOL SCROLL-TO-TOP */
+/* 7. SCROLL TO TOP */
 /* ==================================== */
+
 #scrollToTopBtn {
-	/* Posisi selalu tetap di layar */
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
 	z-index: 9999;
-
-	/* Gaya Visual */
-	background-color: var(
-		--accent-color
-	); /* Latar belakang: Biru Gelap (#0056b3) */
-	color: var(--bg-white); /* 💥 Panah/Teks: Putih (#ffffff) */
-	border: none;
-	border-radius: 50%;
 	width: 45px;
 	height: 45px;
+	border-radius: 50%;
+	background-color: var(--accent-color);
+	color: white;
+	border: none;
 	font-size: 1.5em;
 	cursor: pointer;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-
-	/* Animasi Tampil/Sembunyi */
 	opacity: 0;
 	visibility: hidden;
-	transition: opacity 0.3s ease, visibility 0.3s ease;
+	transition: 0.3s;
 }
 
-#scrollToTopBtn:hover {
-	background-color: #004c99; /* Biru lebih gelap saat hover */
-}
-
-/* Class yang ditambahkan oleh JS untuk menampilkan tombol */
 #scrollToTopBtn.show {
 	opacity: 1;
 	visibility: visible;
 }
 
 /* ==================================== */
-/* 2. RESPONSIVENESS & MOBILE MENU (HAMBURGER) */
+/* 8. MOBILE */
 /* ==================================== */
 
-/* Sembunyikan tombol toggle secara default (hanya muncul di mobile) */
 .menu-toggle {
 	display: none;
-	background: none;
-	border: none;
 	cursor: pointer;
 	padding: 10px;
-	z-index: 1001; /* Di atas elemen lain */
-	position: relative;
-	/* Sesuaikan warna hamburger menu dengan tema */
-	color: var(--text-dark);
 }
 
 .menu-toggle .bar {
-	display: block;
 	width: 25px;
 	height: 3px;
+	background-color: var(--text-dark);
 	margin: 5px auto;
-	background-color: var(--text-dark); /* Warna bar */
-	transition: all 0.3s ease-in-out;
+	transition: 0.3s;
 }
 
-/* ------------------------------------------------ */
-/* MEDIA QUERY: LAYAR KECIL (HP) - Lebar Maksimum 768px */
-/* ------------------------------------------------ */
 @media (max-width: 768px) {
-	/* HEADER MOBILE */
 	.header {
-		/* Memastikan logo di kiri dan hamburger di kanan */
-		justify-content: space-between;
 		padding: 10px 20px;
-		position: relative;
 	}
 
-	/* Tampilkan hamburger menu */
 	.menu-toggle {
 		display: block;
 	}
 
-	/* Sembunyikan navigasi desktop secara default */
 	.header-right {
-		display: none; /* Sembunyikan default */
+		display: none;
 		flex-direction: column;
 		position: absolute;
-		top: 100%; /* Di bawah header */
+		top: 100%;
 		right: 0;
 		width: 100%;
-		max-width: 250px; /* Lebar menu untuk HP */
-		background-color: var(--bg-white);
-		box-shadow: var(--shadow-soft);
+		max-width: 250px;
+		background: white;
 		padding: 10px 0;
-		border-radius: 0 0 5px 5px;
-		z-index: 1000;
-		align-items: flex-start; /* Rata kiri */
+		box-shadow: var(--shadow-soft);
 	}
 
-	/* Tampilkan navigasi saat kelas 'open' ditambahkan oleh JS */
 	.header-right.open {
 		display: flex;
 	}
 
-	.header-right .nav-link,
-	.header-right a {
-		padding: 12px 20px;
-		width: 100%;
-		border-bottom: 1px solid var(--border-soft);
+	.info-content {
+		padding: 20px !important;
 	}
 
-	/* Animasi silang (cross) untuk hamburger saat menu terbuka */
-	.menu-toggle.open .bar:nth-child(1) {
-		transform: translateY(8px) rotate(45deg);
+	.map-area {
+		padding: 10px;
+		min-height: 250px !important;
 	}
-
-	.menu-toggle.open .bar:nth-child(2) {
-		opacity: 0;
-	}
-
-	.menu-toggle.open .bar:nth-child(3) {
-		transform: translateY(-8px) rotate(-45deg);
-	}
-
-	/* NAVIGASI DISTRIK MOBILE (PERKECIL) */
-	.district-nav {
-		padding: 5px 0;
-		margin-bottom: 15px;
-		overflow-x: auto; /* Mengaktifkan scroll horizontal */
-		white-space: nowrap;
-		-webkit-overflow-scrolling: touch;
-		top: 70px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	}
-
-	/* Sembunyikan scrollbar di beberapa browser (opsional) */
-	.district-nav::-webkit-scrollbar {
-		display: none;
-	}
-	.district-nav {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-	}
-
-	.district-nav ul {
-		justify-content: flex-start;
-		padding: 0 10px;
-		gap: 10px; /* Jarak antar item diperkecil lagi */
-	}
-
-	.district-nav li {
-		/* Perkecil Font secara signifikan */
-		font-size: 0.75em; /* DARI 0.8em MENJADI 0.75em */
-		flex-shrink: 0;
-	}
-
-	.district-nav a {
-		padding: 5px 7px; /* Padding diperkecil lagi */
-
-		/* Hapus animasi underline untuk mobile agar lebih ringkas */
-		&::before,
-		&::after {
-			display: none;
-		}
-	}
-
-	/* Pastikan dropdown Kota/Kabupaten tetap terlihat saat di-scroll */
-	.district-nav .dropdown-item {
-		position: relative;
-	}
-
-	.district-nav .dropdown-content {
-		min-width: 120px; /* Perkecil lebar minimum dropdown */
-		font-size: 1em; /* Ukuran font di dalam dropdown tetap nyaman */
-		left: 0;
-		right: auto;
-	}
-	.desktop-district-nav {
-        display: block; /* Tetap ditampilkan di luar menu */
-        padding: 5px 0; 
-        margin-bottom: 15px;
-        overflow-x: auto; 
-        white-space: nowrap; 
-        top: 70px; 
-    }
-    
-    .desktop-district-nav ul {
-        justify-content: flex-start; 
-        padding: 0 10px;
-        gap: 10px; 
-    }
-
-    .desktop-district-nav li {
-        font-size: 0.75em; 
-        flex-shrink: 0; 
-    }
-    
-    /* Sembunyikan Navigasi Desktop di dalam Hamburger Menu agar tidak bertabrakan */
-    .header-right .nav-link::after,
-    .desktop-district-nav a::before,
-    .desktop-district-nav a::after {
-        display: none;
-    }
-
-
-    /* === GAYA NAVIGASI DISTRIK DI DALAM HAMBURGER MENU (Mobile Vertikal) === */
-    .header-right .mobile-district-nav {
-        display: block; /* Tampilkan di dalam hamburger menu */
-        background-color: transparent;
-        padding: 10px 0;
-        margin-top: 10px;
-        box-shadow: none;
-    }
-    
-    .mobile-district-nav ul {
-        flex-direction: column; /* Ubah tata letak menjadi vertikal */
-        align-items: flex-start;
-        gap: 0;
-        padding: 0;
-    }
-    
-    .mobile-district-nav li {
-        width: 100%;
-        font-size: 1em; /* Ukuran font lebih besar agar mudah disentuh */
-        padding: 0;
-        border-bottom: 1px solid var(--border-soft);
-    }
-    
-    .mobile-district-nav a {
-        padding: 10px 20px; /* Padding yang nyaman */
-        color: var(--text-dark);
-        background-color: transparent;
-    }
-    
-    .mobile-district-nav .dropdown-item {
-        width: 100%;
-    }
-    
-    /* Gaya Dropdown di dalam Menu Vertikal */
-    .mobile-district-nav .dropdown-content {
-        position: static; /* Biarkan konten muncul di bawah link */
-        display: block; 
-        visibility: hidden; /* Sembunyikan default (perlu JS untuk toggle) */
-        opacity: 0; 
-        height: 0;
-        overflow: hidden;
-        transition: all 0.3s ease-in-out;
-        box-shadow: none;
-        background-color: var(--bg-light); /* Warna background sedikit berbeda */
-    }
 }
 
-/* ------------------------------------------------ */
-/* MEDIA QUERY: LAYAR LEBAR (Monitor 16" ke atas, TV) - Lebar Minimum 1200px */
-/* ------------------------------------------------ */
+/* ==================================== */
+/* 9. WIDE SCREEN */
+/* ==================================== */
+
 @media (min-width: 1200px) {
 	.container {
-		max-width: 1400px; /* Batas lebar konten di layar sangat lebar */
+		max-width: 1400px;
 	}
-	.main-content {
-		gap: 30px; /* Jarak antar kolom lebih lega */
-	}
+
 	.map-area svg {
-		width: 1000px; /* Ukuran peta bisa lebih besar */
-		height: auto;
+		width: 1000px;
 	}
 }
+
+.card,
+.card-header,
+.card-body,
+.card-footer {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
